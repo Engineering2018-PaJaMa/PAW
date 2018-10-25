@@ -12,37 +12,36 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/boards/cards")
+import Representation.Card;
+
+@Path("/board{boardId}/cards")
 @Produces(MediaType.APPLICATION_JSON)
-public class CardsController
+public class CardController
 {
 	private final Validator validator;
 
-	public CardsController(Validator validator)
+	public CardController(Validator validator)
 	{
 		this.validator = validator;
 	}
 
 	@GET
-	public Response getCards() {
-		return Response.ok("Karta").build();
+	public Card getCards() {
+		return new Card(2,1,"Karta 1","Pierwsza Karta");
 	}
 
 	@POST
 	public Response createCard() throws URISyntaxException
 	{
-		return Response.status(Response.Status.CREATED).build();
-	}
+		return Response.ok("createCard").build();	}
 
 	@PUT
 	@Path("{boards}/{id}")
 	public Response updateCardById() {
-		return Response.status(Response.Status.ACCEPTED).build();
-	}
+		return Response.ok("updateCardById").build();	}
 
 	@DELETE
 	@Path("{boards}/{id}")
 	public Response removeCardById() {
-		return Response.status(Response.Status.OK).build();
-	}
+		return Response.ok("removeCardById").build();	}
 }

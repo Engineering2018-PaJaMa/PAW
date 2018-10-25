@@ -13,38 +13,37 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import Representation.Board;
+
 @Path("/boards")
 @Produces(MediaType.APPLICATION_JSON)
-public class BoardsController
+public class BoardController
 {
 	private final Validator validator;
 
-	public BoardsController(Validator validator)
+	public BoardController(Validator validator)
 	{
 		this.validator = validator;
 	}
 
 	@PermitAll
 	@GET
-	public Response getBoards() {
-		return Response.ok("Tablice").build();
+	public Board getBoards() {
+		return new Board(1,"Tablica 1");
 	}
 
 	@POST
 	public Response createBoards() throws URISyntaxException
 	{
-		return Response.status(Response.Status.CREATED).build();
-	}
+		return Response.ok("createBoards").build();	}
 
 	@PUT
 	@Path("/{id}")
 	public Response updateBoardsById() {
-		return Response.status(Response.Status.ACCEPTED).build();
-	}
+		return Response.ok("updateBoardsById").build();	}
 
 	@DELETE
 	@Path("/{id}")
 	public Response removeBoardsById() {
-		return Response.status(Response.Status.OK).build();
-	}
+		return Response.ok("removeBoardsById").build();	}
 }
