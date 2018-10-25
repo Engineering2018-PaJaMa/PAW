@@ -8,12 +8,18 @@ import { Board } from '../board';
 })
 export class BoardComponent implements OnInit {
 
-  board: Board={
-    id:'Id for test board',
-    name:'First board'
-  };
+    boards: Array<Board>;
+    name:String;
+    desc:String;
+    
+  constructor() {
+    this.boards = [];
+   }
 
-  constructor() { }
+   addBoard(new_name,new_desc){
+    let board = new Board(new_name,new_desc);
+    this.boards.push(board);
+  }
 
   ngOnInit() {
   }

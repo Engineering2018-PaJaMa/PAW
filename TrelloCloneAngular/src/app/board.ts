@@ -1,4 +1,9 @@
 export class Board {
-    id: string;
     name: string;
+    desc: string;
+
+    constructor(name,desc){
+      this.name = name;
+      this.desc = desc;
+    }
   }
