@@ -1,5 +1,7 @@
 package PawProject;
 
+import Controller.BoardsController;
+import Controller.CardsController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -21,9 +23,9 @@ public class TrelloCloneCoreApplication extends Application<TrelloCloneCoreConfi
     }
 
     @Override
-    public void run(final TrelloCloneCoreConfiguration configuration,
-                    final Environment environment) {
-        // TODO: implement application
+    public void run(final TrelloCloneCoreConfiguration configuration, final Environment environment) {
+		environment.jersey().register(new BoardsController(environment.getValidator()));
+		environment.jersey().register(new CardsController(environment.getValidator()));
     }
 
 }
