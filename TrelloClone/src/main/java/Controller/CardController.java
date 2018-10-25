@@ -1,7 +1,5 @@
 package Controller;
 
-import java.net.URISyntaxException;
-
 import javax.validation.Validator;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,22 +24,28 @@ public class CardController
 	}
 
 	@GET
-	public Card getCards() {
-		return new Card(2,1,"Karta 1","Pierwsza Karta");
+	public Card getCards()
+	{
+		return new Card(2, 1, "Karta 1", "Pierwsza Karta");
 	}
 
 	@POST
-	public Response createCard() throws URISyntaxException
+	public Response createCard()
 	{
-		return Response.ok("createCard").build();	}
+		return Response.ok("createCard").build();
+	}
 
 	@PUT
 	@Path("{boards}/{id}")
-	public Response updateCardById() {
-		return Response.ok("updateCardById").build();	}
+	public Response updateCardById()
+	{
+		return Response.ok("updateCardById").build();
+	}
 
 	@DELETE
 	@Path("{boards}/{id}")
-	public Response removeCardById() {
-		return Response.ok("removeCardById").build();	}
+	public Response removeCardById()
+	{
+		return Response.ok("removeCardById").build();
+	}
 }

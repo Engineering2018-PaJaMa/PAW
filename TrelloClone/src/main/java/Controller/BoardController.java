@@ -1,7 +1,5 @@
 package Controller;
 
-import java.net.URISyntaxException;
-
 import javax.annotation.security.PermitAll;
 import javax.validation.Validator;
 import javax.ws.rs.DELETE;
@@ -28,22 +26,28 @@ public class BoardController
 
 	@PermitAll
 	@GET
-	public Board getBoards() {
-		return new Board(1,"Tablica 1");
+	public Board getBoards()
+	{
+		return new Board(1, "Tablica 1");
 	}
 
 	@POST
-	public Response createBoards() throws URISyntaxException
+	public Response createBoards()
 	{
-		return Response.ok("createBoards").build();	}
+		return Response.ok("createBoards").build();
+	}
 
 	@PUT
 	@Path("/{id}")
-	public Response updateBoardsById() {
-		return Response.ok("updateBoardsById").build();	}
+	public Response updateBoardsById()
+	{
+		return Response.ok("updateBoardsById").build();
+	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response removeBoardsById() {
-		return Response.ok("removeBoardsById").build();	}
+	public Response removeBoardsById()
+	{
+		return Response.ok("removeBoardsById").build();
+	}
 }
