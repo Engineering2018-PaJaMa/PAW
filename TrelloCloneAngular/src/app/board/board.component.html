@@ -1,0 +1,29 @@
+<form #heroForm="ngForm"></form>
+<div>
+    <label for="name">Name</label>
+    <input type="text" class="board" id="name" [(ngModel)]="name" name="name">
+</div>
+<div>
+    <label for="desc">Short description</label>
+    <input type="text" class="board" id="desc" [(ngModel)]="desc" name="desc">
+</div>
+
+<h2>{{name | uppercase}} Board</h2>
+<div>
+    <span>Description: </span>
+</div>
+<div>
+    {{desc}}
+</div>
+
+<button (onClick)=addBoard(name.value,desc.value)>Save</button>
+
+
+<div>
+    <a routerLink="/list">Create list</a>
+</div>
+<div>
+    <a routerLink="">Home</a>
+</div>
+
+
