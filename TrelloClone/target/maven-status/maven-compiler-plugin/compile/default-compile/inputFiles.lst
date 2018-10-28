@@ -1,2 +1,8 @@
-/Users/Pawel/IdeaProjects/PAW/TrelloClone/src/main/java/PawProject/TrelloCloneCoreApplication.java
-/Users/Pawel/IdeaProjects/PAW/TrelloClone/src/main/java/PawProject/TrelloCloneCoreConfiguration.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/Controller/ListController.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/Controller/CardController.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/Representation/Board.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/PawProject/TrelloCloneCoreApplication.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/PawProject/TrelloCloneCoreConfiguration.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/Representation/Card.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/Controller/BoardController.java
+/Users/janek/Desktop/TrelloClone/PAW/TrelloClone/src/main/java/Representation/List.java
