@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class Card
 {
 	private int id;
-	private int listId;
 	private String title;
 	private String description;
 }

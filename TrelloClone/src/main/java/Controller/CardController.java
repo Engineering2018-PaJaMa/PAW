@@ -4,21 +4,19 @@ import javax.validation.Validator;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import Representation.Card;
 
-@Path("/board{boardId}/cards")
+@Path("/boards/{id}/lists/{id}/cards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
 public class CardController
 {
 	private final Validator validator;
 
-	public CardController(Validator validator)
+	public CardController(final Validator validator)
 	{
 		this.validator = validator;
 	}
@@ -26,26 +24,18 @@ public class CardController
 	@GET
 	public Card getCards()
 	{
-		return new Card(2, 1, "Karta 1", "Pierwsza Karta");
+		return new Card(2, "Karta 1", "Get Pierwsza Karta");
 	}
 
 	@POST
-	public Response createCard()
+	public Card createCard()
 	{
-		return Response.ok("createCard").build();
-	}
-
-	@PUT
-	@Path("{boards}/{id}")
-	public Response updateCardById()
-	{
-		return Response.ok("updateCardById").build();
+		return new Card(2, "Karta 1", "Post Pierwsza Karta");
 	}
 
 	@DELETE
-	@Path("{boards}/{id}")
-	public Response removeCardById()
+	public Card removeCardById()
 	{
-		return Response.ok("removeCardById").build();
+		return new Card(2, "Karta 1", "Delete Pierwsza Karta");
 	}
 }

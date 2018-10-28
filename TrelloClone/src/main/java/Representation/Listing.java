@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class List
+public class Listing
 {
 	private int id;
-	private int listId;
 	private String title;
 	private String description;
 }

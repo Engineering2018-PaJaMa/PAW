@@ -9,35 +9,35 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import Representation.Board;
+import Representation.Listing;
 
-@Path("/boards/{id}")
+@Path("/boards/{id}/lists/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class BoardController
+public class ListingController
 {
 	private final Validator validator;
 
-	public BoardController(final Validator validator)
+	public ListingController(final Validator validator)
 	{
 		this.validator = validator;
 	}
 
 	@PermitAll
 	@GET
-	public Board getBoards()
+	public Listing getBoards()
 	{
-		return new Board(1, "Get Tablica 1");
+		return new Listing(1, "Lista zadan", "Get Lista zadan 1");
 	}
 
 	@POST
-	public Board updateBoardsById()
+	public Listing updateBoardsById()
 	{
-		return new Board(1, "Post Tablica 1");
+		return new Listing(1, "Lista zadan", "Post Lista zadan 1");
 	}
 
 	@DELETE
-	public Board removeBoardsById()
+	public Listing removeBoardsById()
 	{
-		return new Board(1, "Delete Tablica 1");
+		return new Listing(1, "Lista zadan", "Delete Lista zadan 1");
 	}
 }
