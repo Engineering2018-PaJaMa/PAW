@@ -1,29 +1,32 @@
-<form #heroForm="ngForm"></form>
-<div>
-    <label for="name">Name</label>
-    <input type="text" class="board" id="name" [(ngModel)]="name" name="name">
-</div>
-<div>
-    <label for="desc">Short description</label>
-    <input type="text" class="board" id="desc" [(ngModel)]="desc" name="desc">
-</div>
+<!DOCTYPE html>
 
-<h2>{{name | uppercase}} Board</h2>
-<div>
-    <span>Description: </span>
-</div>
-<div>
-    {{desc}}
-</div>
+<html>
+    
+    <body>
 
-<button (onClick)=addBoard(name.value,desc.value)>Save</button>
+        <div style="text-align: center" class="exampleBoard">
+          <h2>{{name | uppercase}} Board</h2>
+          <span>Description: {{desc}}</span>
+        </div>
 
+        <div style="text-align: center">
+            <label for="name">Name</label>
+            <input type="text" class="board" id="name" [(ngModel)]="name" name="name">
+        </div>
 
-<div>
-    <a routerLink="/list">Create list</a>
-</div>
-<div>
-    <a routerLink="">Home</a>
-</div>
+        <div style="text-align: center">
+            <label for="desc">Short description</label>
+            <input type="text" class="board" id="desc" [(ngModel)]="desc" name="desc">
+        </div>
+            
+        <div style="text-align: center" class="btn-group-horizontal" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" (onClick)=addBoard(name.value,desc.value)>Save</button>
+            <button type="button" class="btn btn-default" routerLink="/list">Create list</button>
+            <button type="button" class="btn btn-default" routerLink="">Home</button>
+        </div>
+        
+    </body>
+
+</html>
 
 
