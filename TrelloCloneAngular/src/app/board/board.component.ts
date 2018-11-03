@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
+import { AppServiceService } from '../app-service.service';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
 
-    boards: Array<Board>;
+    board: Board;
     name:String;
     desc:String;
     
-  constructor() {
-    this.boards = [];
-   }
+  constructor(private service: AppServiceService) {
+    }
 
    addBoard(new_name,new_desc){
-    let board = new Board(new_name,new_desc);
-    this.boards.push(board);
+     this.board.name = new_name;
+     this.board.desc = new_desc;
+
+     this.service.saveBoard(this.board)
+     .subscribe(() => this.board);
   }
 
   ngOnInit() {

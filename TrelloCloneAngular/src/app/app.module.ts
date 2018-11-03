@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
@@ -8,6 +9,7 @@ import { RouterModule, Routes} from'@angular/router';
 import { ListComponent } from './list/list.component';
 import { CardComponent } from './card/card.component';
 import { HomeComponent } from './home/home.component';
+import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
 
 
 @NgModule({
@@ -16,13 +18,16 @@ import { HomeComponent } from './home/home.component';
     BoardComponent,
     ListComponent,
     CardComponent,
-    HomeComponent
+    HomeComponent,
+    LogInScreenComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
-      {path:'',component: HomeComponent},
+      {path:'',component: LogInScreenComponent},
+      {path:'home',component: HomeComponent},
       {path:'board',component: BoardComponent},
       {path:'list',component: ListComponent},
       {path:'card',component: CardComponent},
