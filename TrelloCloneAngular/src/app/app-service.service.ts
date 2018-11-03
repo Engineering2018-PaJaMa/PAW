@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Board } from './board';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Board } from './board';
 export class AppServiceService {
 
   private serverUrl = '';
+  private userUrl = '';
   
   constructor(private http: HttpClient) { }
 
@@ -20,5 +22,8 @@ export class AppServiceService {
     return this.http.put(this.serverUrl, board);
   }
 
+  sendUser(user: User) {
+    return this.http.put(this.serverUrl, user);
+  }
 
 }
