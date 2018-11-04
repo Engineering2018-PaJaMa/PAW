@@ -1,16 +1,32 @@
 package Representation;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.security.Principal;
+import java.util.Set;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class User
-{
-    private long id;
-    private String username;
-    private  String password;
+public class User implements Principal {
+    private final String name;
 
+    private final Set<String> roles;
+
+    public User(String name) {
+        this.name = name;
+        this.roles = null;
+    }
+
+    public User(String name, Set<String> roles) {
+        this.name = name;
+        this.roles = roles;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return (int) (Math.random() * 100);
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
 }
