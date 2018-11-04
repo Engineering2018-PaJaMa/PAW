@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Listing
+public class Comment
 {
-	private long id;
-	private String title;
-	private String description;
+
+    private long id;
+    private String title;
+    private String message;
+    private long cardId;
 }
