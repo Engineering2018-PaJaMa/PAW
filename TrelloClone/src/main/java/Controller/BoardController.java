@@ -1,6 +1,7 @@
 package Controller;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Validator;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -10,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import Representation.Board;
+import Representation.User;
+import io.dropwizard.auth.Auth;
 
 @Path("/boards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,7 +27,7 @@ public class BoardController
 
 	@PermitAll
 	@GET
-	public Board getBoards()
+	public Board getBoards(@Auth User user)
 	{
 		return new Board(1, "Get Tablica 1");
 	}

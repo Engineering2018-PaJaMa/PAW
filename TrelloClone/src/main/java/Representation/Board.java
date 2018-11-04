@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Board
 {
 	@NotNull
-	private int id;
+	private long id;
 
 	@NotBlank
 	private String name;

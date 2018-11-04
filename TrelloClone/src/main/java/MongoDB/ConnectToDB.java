@@ -1,6 +1,6 @@
 package MongoDB;
 
-import com.mongodb.client.MongoClient;
+import com.mongodb.MongoClient;
 import org.bson.Document;
 
 import com.mongodb.MongoCredential;

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Card
 {
-	private int id;
+	private long id;
 	private String title;
 	private String description;
 }
