@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
-import { AppServiceService } from '../app-service.service';
+import { AppServiceService } from '../app-userService.service';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +19,6 @@ export class HomeComponent implements OnInit {
   }
 
   getBoard(): void{
-    this.service.getBoards()
-    .subscribe(boards => this.boards = boards);
   }
 
 }

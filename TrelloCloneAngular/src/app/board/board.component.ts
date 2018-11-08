@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
-import { AppServiceService } from '../app-service.service';
+import { AppServiceService } from '../app-userService.service';
 
 @Component({
   selector: 'app-board',
@@ -19,9 +19,6 @@ export class BoardComponent implements OnInit {
    addBoard(new_name,new_desc){
      this.board.name = new_name;
      this.board.desc = new_desc;
-
-     this.service.saveBoard(this.board)
-     .subscribe(() => this.board);
   }
 
   ngOnInit() {
