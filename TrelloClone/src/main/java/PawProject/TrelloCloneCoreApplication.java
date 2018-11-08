@@ -5,6 +5,7 @@ import Authentication.BasicAuthenticator;
 import Controller.BoardController;
 import Controller.CardController;
 import Controller.ListingController;
+import Controller.UserController;
 import Representation.User;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
@@ -40,6 +41,7 @@ public class TrelloCloneCoreApplication extends Application<TrelloCloneCoreConfi
 		environment.jersey().register(new BoardController(environment.getValidator()));
 		environment.jersey().register(new CardController(environment.getValidator()));
 		environment.jersey().register(new ListingController(environment.getValidator()));
+		environment.jersey().register(new UserController(environment.getValidator()));
 
 
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()

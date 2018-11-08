@@ -5,17 +5,20 @@ import java.util.Set;
 
 public class User implements Principal {
     private final String name;
+	private final String password;
 
     private final Set<String> roles;
 
-    public User(String name) {
+    public User(String name, String password) {
         this.name = name;
         this.roles = null;
+        this.password = password;
     }
 
-    public User(String name, Set<String> roles) {
+    public User(String name, Set<String> roles, String password) {
         this.name = name;
         this.roles = roles;
+        this.password = password;
     }
 
     public String getName() {
@@ -29,4 +32,9 @@ public class User implements Principal {
     public Set<String> getRoles() {
         return roles;
     }
+
+	public String getPassword()
+	{
+		return password;
+	}
 }
