@@ -46,6 +46,7 @@ public class ConnectDatabase
 		ValidationOptions usersOptions = new ValidationOptions().validator(Filters.or(
 				Filters.exists("username"),
 				Filters.exists("password"),
+				Filters.exists("role"),
 				Filters.exists("registerDate")));
 		database.createCollection("user", new CreateCollectionOptions().validationOptions(usersOptions));
 

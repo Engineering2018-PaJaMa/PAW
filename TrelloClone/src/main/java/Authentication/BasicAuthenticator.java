@@ -27,7 +27,7 @@ public class BasicAuthenticator implements Authenticator<BasicCredentials, User>
 	{
         if (VALID_USERS.containsKey(credentials.getUsername()) && "password".equals(credentials.getPassword()))
         {
-            return Optional.of(new User(credentials.getUsername(), VALID_USERS.get(credentials.getUsername())));
+            return Optional.of(new User(credentials.getUsername(), VALID_USERS.get(credentials.getUsername()),credentials.getPassword()));
         }
         return Optional.empty();
     }
