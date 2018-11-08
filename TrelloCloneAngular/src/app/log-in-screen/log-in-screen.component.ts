@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppServiceService } from '../app-service.service';
+import { AppAuthenticationServis } from 'src/app/services/app-authentication.service';
 import { User } from '../user';
 
 @Component({
@@ -9,17 +9,13 @@ import { User } from '../user';
 })
 export class LogInScreenComponent implements OnInit {
 
-  private User;
-
-  constructor(private service: AppServiceService) { }
+  constructor(private service: AppAuthenticationServis) { }
 
   ngOnInit() {
   }
 
   logIn(username,password) {
-    var user  = new User(username,password);
-
-    this.service.sendUser(user);
+      this.service.login(username,password);
   }
 
 }

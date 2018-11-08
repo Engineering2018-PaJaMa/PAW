@@ -10,15 +10,15 @@
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
             <div class="form-login">
-            <h4>Welcome to TrelloClone</h4>
-            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+            <h4>Register new user</h4>
+            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="New username" />
             <br>
-            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="New password" />
             <br>
             <div class="wrapper">
-            <span class="btn-group-vertical">     
-                <a href="#" class="btn btn-primary btn-md" routerLink="/home" (onClick)=logIn(userName.value,userPassword.value)>login <i class="fa fa-sign-in"></i></a>
-                <a href="#" class="btn btn-primary btn-md" routerLink="/register">Register <i class="fa fa-sign-in"></i></a>
+            <span class="btn-group-vertical">
+                <a href="#" class="btn btn-primary btn-md" (onClick)=register(userName.value,userPassword.value)>Register <i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md" routerLink="">Home <i class="fa fa-sign-in"></i></a>
             </span>
             </div>
             </div>
