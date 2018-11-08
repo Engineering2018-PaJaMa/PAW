@@ -1,7 +1,6 @@
 package Controller;
 
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Validator;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

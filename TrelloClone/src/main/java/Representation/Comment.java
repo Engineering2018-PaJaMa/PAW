@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Comment
 {
-
-    private long id;
-    private String title;
-    private String message;
-    private long cardId;
+	private long id;
+	private String title;
+	private String message;
+	private long cardId;
 }
