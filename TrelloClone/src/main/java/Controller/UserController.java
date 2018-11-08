@@ -13,8 +13,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import Representation.User;
 import io.dropwizard.auth.Auth;
@@ -45,8 +51,19 @@ public class UserController
 	public String register(@FormParam("username") String username, @FormParam("password") String password)
 	{
 		LOGGER.info("recive data");
+
+		MongoClient mongoClient = MongoClients.create();
+		MongoDatabase database = mongoClient.getDatabase("TrelloClone");
+		MongoCollection<Document> collection = database.getCollection("user");
+
+		Document document = new Document("username", username).append("password",password).append("registerDate","08.11.2018");
+
+		collection.insertOne(document);
+
 		return "User " + username + ", Password: "+ password;
 	}
+
+
 
 	@POST
 	@Path("/postparam")
