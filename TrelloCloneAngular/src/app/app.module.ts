@@ -10,6 +10,7 @@ import { ListComponent } from './list/list.component';
 import { CardComponent } from './card/card.component';
 import { HomeComponent } from './home/home.component';
 import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
+import { RegisterScreenComponent } from './register-screen/register-screen.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
     ListComponent,
     CardComponent,
     HomeComponent,
-    LogInScreenComponent
+    LogInScreenComponent,
+    RegisterScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path:'',component: LogInScreenComponent},
+      {path:'register',component: RegisterScreenComponent},
       {path:'home',component: HomeComponent},
       {path:'board',component: BoardComponent},
       {path:'list',component: ListComponent},

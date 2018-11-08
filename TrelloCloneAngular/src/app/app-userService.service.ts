@@ -5,12 +5,9 @@ import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
-export class AppServiceService {
+export class AppUserService {
 
-  private serverUrl = '';
-  private userUrl = '';
-  
-  constructor(private http: HttpClient) { }
+constructor(private http: HttpClient) { }
 
 getById(id: number) {
     return this.http.get(`/users/` + id);

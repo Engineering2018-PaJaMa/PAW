@@ -14,10 +14,8 @@ export class LogInScreenComponent implements OnInit {
   ngOnInit() {
   }
 
-  logIn(id,username,password) {
-    var user  = new User(id,username,password);
-
-    this.service.login(user.name,user.pass);
+  logIn(username,password) {
+      this.service.login(username,password);
   }
 
 }

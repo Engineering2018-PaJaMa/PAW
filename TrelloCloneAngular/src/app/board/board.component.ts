@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
-import { AppServiceService } from '../app-userService.service';
-
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -13,7 +11,7 @@ export class BoardComponent implements OnInit {
     name:String;
     desc:String;
     
-  constructor(private service: AppServiceService) {
+  constructor() {
     }
 
    addBoard(new_name,new_desc){
