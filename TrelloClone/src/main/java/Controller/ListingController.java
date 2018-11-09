@@ -26,18 +26,18 @@ public class ListingController
 	@GET
 	public List getBoards()
 	{
-		return new List(1, "Lista zadan", "Get Lista zadan 1");
+		return new List();
 	}
 
 	@POST
 	public List updateBoardsById()
 	{
-		return new List(1, "Lista zadan", "Post Lista zadan 1");
+		return new List();
 	}
 
 	@DELETE
 	public List removeBoardsById()
 	{
-		return new List(1, "Lista zadan", "Delete Lista zadan 1");
+		return new List();
 	}
 }

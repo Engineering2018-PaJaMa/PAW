@@ -24,18 +24,18 @@ public class CommentController
 	@GET
 	public Card getCOmment()
 	{
-		return new Card(2, "Komentarz 1", "Get Pierwsza Karta");
+		return new Card();
 	}
 
 	@POST
 	public Card createCommenr()
 	{
-		return new Card(2, "Komentarz 1", "Post Pierwsza Karta");
+		return new Card();
 	}
 
 	@DELETE
 	public Card removeCommentById()
 	{
-		return new Card(2, "Komentarz 1", "Delete Pierwsza Karta");
+		return new Card();
 	}
 }

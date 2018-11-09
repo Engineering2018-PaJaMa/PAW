@@ -24,18 +24,18 @@ public class CardController
 	@GET
 	public Card getCards()
 	{
-		return new Card(2, "Karta 1", "Get Pierwsza Karta");
+		return new Card();
 	}
 
 	@POST
 	public Card createCard()
 	{
-		return new Card(2, "Karta 1", "Post Pierwsza Karta");
+		return new Card();
 	}
 
 	@DELETE
 	public Card removeCardById()
 	{
-		return new Card(2, "Karta 1", "Delete Pierwsza Karta");
+		return new Card();
 	}
 }

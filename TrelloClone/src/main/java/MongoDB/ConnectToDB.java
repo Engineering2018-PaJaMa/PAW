@@ -17,6 +17,7 @@ public class ConnectToDB
 	{
 		creatingCredentials();
 		listAllCollection();
+
 	}
 
 	private static void creatingCredentials()

@@ -1,5 +1,11 @@
-import org.bson.Document;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+
+import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -8,6 +14,12 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.CreateCollectionOptions;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.ValidationOptions;
+
+import Representation.Board;
+import Representation.Card;
+import Representation.Comment;
+import Representation.List;
+
 
 public class ConnectDatabase
 {
@@ -20,7 +32,13 @@ public class ConnectDatabase
 	public static void createConnection()
 	{
 		// Creating a Mongo client
-		MongoClient mongoClient = MongoClients.create();
+		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+				fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+		MongoClientSettings settings = MongoClientSettings.builder()
+				.codecRegistry(pojoCodecRegistry)
+				.build();
+		MongoClient mongoClient = MongoClients.create(settings);
 
 		// Creating Credentials
 		MongoCredential credential;
@@ -37,7 +55,7 @@ public class ConnectDatabase
 				Filters.exists("role"),
 				Filters.exists("registerDate")));
 		database.createCollection("user", new CreateCollectionOptions().validationOptions(usersOptions));
-
+		database.createCollection("boards");
 		System.out.println("Collection created successfully");
 
 	}
@@ -51,6 +69,13 @@ public class ConnectDatabase
 		Document document = new Document("username", "admin").append("password", "admin").append("registerDate", "08.11.2018");
 
 		collection.insertOne(document);
+
+
+		MongoCollection<Board> boardCollection = database.getCollection("boards", Board.class);
+
+		Board test = new Board("test","test","test",new List("test","test",5,"test","test",new Card("test","test",5,
+				new Comment("fdsfsdf","fsfsfsd"))));
+		boardCollection.insertOne(test);
 	}
 
 }

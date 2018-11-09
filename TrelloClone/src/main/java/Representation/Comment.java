@@ -1,5 +1,7 @@
 package Representation;
 
+import org.bson.types.ObjectId;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Comment
 {
-	private long id;
+	private ObjectId id;
 	private String title;
 	private String message;
-	private long cardId;
 }
