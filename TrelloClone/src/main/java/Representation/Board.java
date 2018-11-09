@@ -18,4 +18,7 @@ public class Board
 
 	@NotBlank
 	private String name;
+	private String state;
+	private String visibilty;
+	private long userId;
 }

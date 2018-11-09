@@ -12,4 +12,7 @@ public class Card
 	private long id;
 	private String title;
 	private String description;
+	private String listId;
+	private int postion;
+
 }
