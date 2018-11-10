@@ -1,64 +1,63 @@
 package Controller;
 
+import static com.mongodb.client.model.Filters.eq;
+
+import java.time.LocalDate;
+import java.util.Optional;
+import java.util.Set;
+
 import javax.validation.Validator;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import MongoDB.DatabaseController;
+import Representation.User;
 
-@Path("/user")
+@Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
-public class UserController
+public class UserController extends EndpointController
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-	private final Validator validator;
-
 	public UserController(final Validator validator)
 	{
 		this.validator = validator;
+		databaseController = new DatabaseController();
+		databaseController.setUpConnection();
 	}
 
 	@GET
-	@Path("/{id}")
-	public String getUser()
+	@Path("/{username}")
+	public Optional<Document> getUser(@PathParam("username") final String username)
 	{
-		LOGGER.info("get");
-		return "User ";
+		LOGGER.info("Returning info from database for user: {}", username);
+		Document document = new Document("username", username);
+		return Optional.ofNullable(databaseController.getCollection("user").find(eq("username", username)).first());
+	}
+
+	@DELETE
+	@Path("/{username}")
+	public Document deleteUser(@PathParam("username") final String username)
+	{
+		LOGGER.info("Returning info from database for user: {}", username);
+		Document document = new Document("username", username);
+		return databaseController.getCollection("user").findOneAndDelete(eq("username", username));
 	}
 
 	@POST
 	@Path("/register")
-	public String register(@FormParam("username") String username, @FormParam("password") String password)
+	public User register(@FormParam("username") final String username, @FormParam("password") final String password)
 	{
-		LOGGER.info("Receiving data");
+		LOGGER.info("Receiving data for user: {}", username);
+		Document document = new Document("username", username).append("password", password).append("registerDate", LocalDate.now().toString());
+		databaseController.getCollection("user").insertOne(document);
 
-		MongoClient mongoClient = MongoClients.create();
-		MongoDatabase database = mongoClient.getDatabase("TrelloClone");
-		MongoCollection<Document> collection = database.getCollection("user");
-
-		Document document = new Document("username", username).append("password", password).append("registerDate", "08.11.2018");
-
-		collection.insertOne(document);
-
-		return "User " + username + ", Password: " + password;
+		return new User(username, password, Set.of("READ_ROLE"));
 	}
-
-	@POST
-	@Path("/postparam")
-	public String postParam(@FormParam("message") String message)
-	{
-		return "You posted " + message;
-	}
-
 }

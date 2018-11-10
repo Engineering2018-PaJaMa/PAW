@@ -1,7 +1,5 @@
 package Representation;
 
-import org.bson.types.ObjectId;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Card
 {
-	private ObjectId id;
+	private int id;
 	private String title;
 	private String description;
-	private ObjectId listId;
+	private int listId;
 	private int postion;
 	private Comment comment;
 

@@ -18,7 +18,6 @@ import io.dropwizard.setup.Environment;
 
 public class TrelloCloneCoreApplication extends Application<TrelloCloneCoreConfiguration>
 {
-
 	public static void main(final String[] args) throws Exception
 	{
 		new TrelloCloneCoreApplication().run(args);

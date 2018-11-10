@@ -20,7 +20,6 @@ import Representation.Card;
 import Representation.Comment;
 import Representation.List;
 
-
 public class ConnectDatabase
 {
 	public static void main(final String[] args)
@@ -35,9 +34,7 @@ public class ConnectDatabase
 		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
 				fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
-		MongoClientSettings settings = MongoClientSettings.builder()
-				.codecRegistry(pojoCodecRegistry)
-				.build();
+		MongoClientSettings settings = MongoClientSettings.builder().codecRegistry(pojoCodecRegistry).build();
 		MongoClient mongoClient = MongoClients.create(settings);
 
 		// Creating Credentials
@@ -57,7 +54,6 @@ public class ConnectDatabase
 		database.createCollection("user", new CreateCollectionOptions().validationOptions(usersOptions));
 		database.createCollection("boards");
 		System.out.println("Collection created successfully");
-
 	}
 
 	private static void addTestUser()
@@ -70,12 +66,21 @@ public class ConnectDatabase
 
 		collection.insertOne(document);
 
-
 		MongoCollection<Board> boardCollection = database.getCollection("boards", Board.class);
 
-		Board test = new Board("test","test","test",new List("test","test",5,"test","test",new Card("test","test",5,
-				new Comment("fdsfsdf","fsfsfsd"))));
+		Board test = new Board(1,
+				"nameBoard",
+				"stateBoard",
+				"visibilityBoard",
+				1,
+				new List(1,
+						"titleList",
+						"descList",
+						5,
+						1,
+						"stateList",
+						"visibilityList",
+						new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment"))));
 		boardCollection.insertOne(test);
 	}
-
 }

@@ -12,10 +12,8 @@ import Representation.Card;
 
 @Path("/boards/{id}/lists/{id}/cards/{id}/comment/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class CommentController
+public class CommentController extends EndpointController
 {
-	private final Validator validator;
-
 	public CommentController(final Validator validator)
 	{
 		this.validator = validator;

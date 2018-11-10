@@ -13,10 +13,8 @@ import Representation.List;
 
 @Path("/boards/{id}/lists/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class ListingController
+public class ListingController extends EndpointController
 {
-	private final Validator validator;
-
 	public ListingController(final Validator validator)
 	{
 		this.validator = validator;

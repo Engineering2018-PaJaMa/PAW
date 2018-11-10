@@ -12,10 +12,8 @@ import Representation.Card;
 
 @Path("/boards/{id}/lists/{id}/cards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class CardController
+public class CardController extends EndpointController
 {
-	private final Validator validator;
-
 	public CardController(final Validator validator)
 	{
 		this.validator = validator;

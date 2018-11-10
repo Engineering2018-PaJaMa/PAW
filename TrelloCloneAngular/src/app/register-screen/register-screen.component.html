@@ -6,7 +6,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<div class="container">
+<div class="container" ng-controller="RegisterScreenComponent">
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
             <div class="form-login">
@@ -17,8 +17,8 @@
             <br>
             <div class="wrapper">
             <span class="btn-group-vertical">
-                <a href="#" class="btn btn-primary btn-md" (onClick)=register(userName.value,userPassword.value)>Register <i class="fa fa-sign-in"></i></a>
-                <a href="#" class="btn btn-primary btn-md" routerLink="">Home <i class="fa fa-sign-in"></i></a>
+                <a class="btn btn-primary btn-md"  (click)="register(userName.value,userPassword.value)">Register <i class="fa fa-sign-in"></i></a>
+                <a class="btn btn-primary btn-md" routerLink="">Home <i class="fa fa-sign-in"></i></a>
             </span>
             </div>
             </div>

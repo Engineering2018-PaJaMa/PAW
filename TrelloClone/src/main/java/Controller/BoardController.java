@@ -15,10 +15,8 @@ import io.dropwizard.auth.Auth;
 
 @Path("/boards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class BoardController
+public class BoardController extends EndpointController
 {
-	private final Validator validator;
-
 	public BoardController(final Validator validator)
 	{
 		this.validator = validator;
