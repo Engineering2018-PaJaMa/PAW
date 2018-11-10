@@ -7,9 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Listing
+public class List
 {
-	private long id;
+	private int id;
 	private String title;
 	private String description;
+	private int boardId;
+	private int position;
+	private String state;
+	private String visibility;
+	private Card card;
+
 }

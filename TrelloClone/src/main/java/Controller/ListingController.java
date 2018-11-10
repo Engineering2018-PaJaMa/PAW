@@ -9,14 +9,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import Representation.Listing;
+import Representation.List;
 
 @Path("/boards/{id}/lists/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class ListingController
+public class ListingController extends EndpointController
 {
-	private final Validator validator;
-
 	public ListingController(final Validator validator)
 	{
 		this.validator = validator;
@@ -24,20 +22,20 @@ public class ListingController
 
 	@PermitAll
 	@GET
-	public Listing getBoards()
+	public List getBoards()
 	{
-		return new Listing(1, "Lista zadan", "Get Lista zadan 1");
+		return new List();
 	}
 
 	@POST
-	public Listing updateBoardsById()
+	public List updateBoardsById()
 	{
-		return new Listing(1, "Lista zadan", "Post Lista zadan 1");
+		return new List();
 	}
 
 	@DELETE
-	public Listing removeBoardsById()
+	public List removeBoardsById()
 	{
-		return new Listing(1, "Lista zadan", "Delete Lista zadan 1");
+		return new List();
 	}
 }

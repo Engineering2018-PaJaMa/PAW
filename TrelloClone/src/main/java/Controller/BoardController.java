@@ -15,10 +15,8 @@ import io.dropwizard.auth.Auth;
 
 @Path("/boards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class BoardController
+public class BoardController extends EndpointController
 {
-	private final Validator validator;
-
 	public BoardController(final Validator validator)
 	{
 		this.validator = validator;
@@ -28,18 +26,18 @@ public class BoardController
 	@GET
 	public Board getBoards(@Auth User user)
 	{
-		return new Board(1, "Get Tablica 1");
+		return new Board();
 	}
 
 	@POST
 	public Board updateBoardsById()
 	{
-		return new Board(1, "Post Tablica 1");
+		return new Board();
 	}
 
 	@DELETE
 	public Board removeBoardsById()
 	{
-		return new Board(1, "Delete Tablica 1");
+		return new Board();
 	}
 }

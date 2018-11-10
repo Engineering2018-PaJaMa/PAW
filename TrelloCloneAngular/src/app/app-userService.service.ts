@@ -10,11 +10,11 @@ export class AppUserService {
 constructor(private http: HttpClient) { }
 
 getById(id: number) {
-    return this.http.get(`/users/` + id);
+    return this.http.get(`http://localhost:8080/user` + id);
 }
 
 register(user: User) {
-    return this.http.post(`/users/register`, user);
+    return this.http.post(`http://localhost:8080/user/register`, {"username":user.name, "password":user.pass});
 }
 
 update(user: User) {

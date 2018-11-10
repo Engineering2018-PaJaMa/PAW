@@ -12,10 +12,8 @@ import Representation.Card;
 
 @Path("/boards/{id}/lists/{id}/cards/{id}/comment/{id}")
 @Produces(MediaType.APPLICATION_JSON)
-public class CommentController
+public class CommentController extends EndpointController
 {
-	private final Validator validator;
-
 	public CommentController(final Validator validator)
 	{
 		this.validator = validator;
@@ -24,18 +22,18 @@ public class CommentController
 	@GET
 	public Card getCOmment()
 	{
-		return new Card(2, "Komentarz 1", "Get Pierwsza Karta");
+		return new Card();
 	}
 
 	@POST
 	public Card createCommenr()
 	{
-		return new Card(2, "Komentarz 1", "Post Pierwsza Karta");
+		return new Card();
 	}
 
 	@DELETE
 	public Card removeCommentById()
 	{
-		return new Card(2, "Komentarz 1", "Delete Pierwsza Karta");
+		return new Card();
 	}
 }
