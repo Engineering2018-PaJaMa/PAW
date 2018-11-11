@@ -34,7 +34,7 @@ public class UserController extends EndpointController
 	public Optional<Document> getUser(@PathParam("username") final String username)
 	{
 		LOGGER.info("Returning info from database for user: {}", username);
-		return Optional.ofNullable(databaseController.getCollection("user").find(eq("username", username)).first());
+		return Optional.ofNullable(databaseController.getCollection("users").find(eq("username", username)).first());
 	}
 
 	@POST
@@ -43,7 +43,7 @@ public class UserController extends EndpointController
 	{
 		LOGGER.info("Creating data for user: {}", username);
 		Document document = new Document("username", username).append("password", password).append("registerDate", LocalDate.now().toString());
-		databaseController.getCollection("user").insertOne(document);
+		databaseController.getCollection("users").insertOne(document);
 
 		return new User(username, password, Set.of("READ_ROLE"));
 	}
@@ -53,6 +53,6 @@ public class UserController extends EndpointController
 	public Document deleteUserByUsername(@PathParam("username") final String username)
 	{
 		LOGGER.info("Deleting from database user: {}", username);
-		return databaseController.getCollection("user").findOneAndDelete(eq("username", username));
+		return databaseController.getCollection("users").findOneAndDelete(eq("username", username));
 	}
 }

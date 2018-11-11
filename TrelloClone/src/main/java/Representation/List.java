@@ -1,13 +1,17 @@
 package Representation;
 
+import org.bson.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class List
+public class List extends Document
 {
 	private int id;
 	private String title;

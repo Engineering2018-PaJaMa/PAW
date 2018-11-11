@@ -26,6 +26,8 @@ public class ConnectDatabase
 	{
 		createConnection();
 		addTestUser();
+		addTestBoard();
+		addTestList();
 	}
 
 	public static void createConnection()
@@ -40,7 +42,6 @@ public class ConnectDatabase
 		// Creating Credentials
 		MongoCredential credential;
 		credential = MongoCredential.createCredential("sampleUser", "TrelloClone", "password".toCharArray());
-		System.out.println("Connected to the database successfully");
 
 		// Accessing the database
 		MongoDatabase database = mongoClient.getDatabase("TrelloClone");
@@ -51,36 +52,48 @@ public class ConnectDatabase
 				Filters.exists("password"),
 				Filters.exists("role"),
 				Filters.exists("registerDate")));
-		database.createCollection("user", new CreateCollectionOptions().validationOptions(usersOptions));
+		database.createCollection("users", new CreateCollectionOptions().validationOptions(usersOptions));
 		database.createCollection("boards");
-		System.out.println("Collection created successfully");
+		database.createCollection("lists");
+		database.createCollection("cards");
+		database.createCollection("comments");
 	}
 
 	private static void addTestUser()
 	{
 		MongoClient mongoClient = MongoClients.create();
 		MongoDatabase database = mongoClient.getDatabase("TrelloClone");
-		MongoCollection<Document> collection = database.getCollection("user");
-
+		MongoCollection<Document> collection = database.getCollection("users");
 		Document document = new Document("username", "admin").append("password", "admin").append("registerDate", "08.11.2018");
-
 		collection.insertOne(document);
+	}
 
-		MongoCollection<Board> boardCollection = database.getCollection("boards", Board.class);
-
-		Board test = new Board(1,
-				"nameBoard",
-				"stateBoard",
-				"visibilityBoard",
+	private static void addTestBoard()
+	{
+		MongoClient mongoClient = MongoClients.create();
+		MongoDatabase database = mongoClient.getDatabase("TrelloClone");
+		MongoCollection<Board> collection = database.getCollection("boards", Board.class);
+		//To jest fajne. Potrzebujemy tylko jakiegos modelMappera, zeby przerzucal pola z POJO'sow na pola do BSON'a
+//		Mam pomysl jak to zrobic. Statyczny model mapper z metodami typu convert. Zwracajacy z boarda document. Kurwa sztos
+		//TODO Model mapper Board.class -> Document.class
+		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1, new List(1,
+				"titleList",
+				"descList",
+				5,
 				1,
-				new List(1,
-						"titleList",
-						"descList",
-						5,
-						1,
-						"stateList",
-						"visibilityList",
-						new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment"))));
-		boardCollection.insertOne(test);
+				"stateList",
+				"visibilityList",
+				new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment"))));
+		collection.insertOne(testBoard);
+	}
+
+	private static void addTestList()
+	{
+		MongoClient mongoClient = MongoClients.create();
+		MongoDatabase database = mongoClient.getDatabase("TrelloClone");
+		MongoCollection<List> collection = database.getCollection("lists", List.class);
+
+		List testList = new List(11, "listTittle", "listDesc", 1, 10, "listState", "listVisibility", new Card());
+		collection.insertOne(testList);
 	}
 }
