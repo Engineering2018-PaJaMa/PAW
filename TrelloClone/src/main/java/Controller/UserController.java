@@ -18,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
 
-import MongoDB.DatabaseController;
 import Representation.User;
 
 @Path("/users")
@@ -28,8 +27,6 @@ public class UserController extends EndpointController
 	public UserController(final Validator validator)
 	{
 		this.validator = validator;
-		databaseController = new DatabaseController();
-		databaseController.setUpConnection();
 	}
 
 	@GET
@@ -37,27 +34,25 @@ public class UserController extends EndpointController
 	public Optional<Document> getUser(@PathParam("username") final String username)
 	{
 		LOGGER.info("Returning info from database for user: {}", username);
-		Document document = new Document("username", username);
 		return Optional.ofNullable(databaseController.getCollection("user").find(eq("username", username)).first());
-	}
-
-	@DELETE
-	@Path("/{username}")
-	public Document deleteUser(@PathParam("username") final String username)
-	{
-		LOGGER.info("Returning info from database for user: {}", username);
-		Document document = new Document("username", username);
-		return databaseController.getCollection("user").findOneAndDelete(eq("username", username));
 	}
 
 	@POST
 	@Path("/register")
 	public User register(@FormParam("username") final String username, @FormParam("password") final String password)
 	{
-		LOGGER.info("Receiving data for user: {}", username);
+		LOGGER.info("Creating data for user: {}", username);
 		Document document = new Document("username", username).append("password", password).append("registerDate", LocalDate.now().toString());
 		databaseController.getCollection("user").insertOne(document);
 
 		return new User(username, password, Set.of("READ_ROLE"));
+	}
+
+	@DELETE
+	@Path("/{username}")
+	public Document deleteUserByUsername(@PathParam("username") final String username)
+	{
+		LOGGER.info("Deleting from database user: {}", username);
+		return databaseController.getCollection("user").findOneAndDelete(eq("username", username));
 	}
 }

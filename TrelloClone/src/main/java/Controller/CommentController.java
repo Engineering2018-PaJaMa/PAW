@@ -20,13 +20,13 @@ public class CommentController extends EndpointController
 	}
 
 	@GET
-	public Card getCOmment()
+	public Card getComment()
 	{
 		return new Card();
 	}
 
 	@POST
-	public Card createCommenr()
+	public Card createComment()
 	{
 		return new Card();
 	}

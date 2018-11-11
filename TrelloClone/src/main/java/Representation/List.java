@@ -17,5 +17,4 @@ public class List
 	private String state;
 	private String visibility;
 	private Card card;
-
 }
