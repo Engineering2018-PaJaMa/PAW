@@ -15,8 +15,7 @@ public class Converter
 {
 	public Document convert(User user)
 	{
-		//TODO NOW
-		return null;
+		return new Document("name", user.getName()).append("password", user.getPassword()).append("roles", user.getRoles());
 	}
 
 	public Document convert(Board board)
@@ -30,19 +29,28 @@ public class Converter
 
 	public Document convert(Listing list)
 	{
-		//TODO WITH LISTCONTROLLER
-		return null;
+		return new Document("listId", list.getId()).append("title", list.getTitle())
+				.append("description", list.getDescription())
+				.append("boardId", list.getBoardId())
+				.append("position", list.getPosition())
+				.append("state", list.getState())
+				.append("visibility", list.getVisibility())
+				.append("card", list.getCard());
 	}
 
 	public Document convert(Card card)
 	{
-		//TODO WITH CARDCONTROLLER
-		return null;
+		return new Document("cardId", card.getId()).append("title", card.getTitle())
+				.append("description", card.getDescription())
+				.append("listId", card.getListId())
+				.append("position", card.getPostion())
+				.append("comment", card.getComment());
 	}
 
 	public Document convert(Comment comment)
 	{
-		//TODO WITH COMMENTCONTROLLER
-		return null;
+		return new Document("id", comment.getId()).append("title", comment.getTitle())
+				.append("message", comment.getMessage())
+				.append("position", comment.getPossition());
 	}
 }
