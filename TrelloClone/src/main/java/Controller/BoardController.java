@@ -3,6 +3,7 @@ package Controller;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.util.Optional;
+import java.util.Set;
 
 import javax.annotation.security.PermitAll;
 import javax.validation.Validator;
@@ -47,7 +48,7 @@ public class BoardController extends EndpointController
 				.append("userId", "1")
 				.append("lists", null);
 		databaseController.getCollection("boards").insertOne(document);
-		return new Board(Integer.valueOf(id), "boardName", "boardState", "boardVisibility", 1, new List());
+		return new Board(Integer.valueOf(id), "boardName", "boardState", "boardVisibility", 1, Set.of(new List()));
 	}
 
 	@DELETE
