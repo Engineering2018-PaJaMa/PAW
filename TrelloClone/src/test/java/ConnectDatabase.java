@@ -44,18 +44,19 @@ public class ConnectDatabase
 	{
 		MongoCollection<Document> collection = database.getCollection("boards");
 
-		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1, Set.of(new List(1,
+		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1,
+				Set.of(new List(1,
 				"titleList",
 				"descList",
 				5,
 				1,
 				"stateList",
-				"visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment")))));
+				"visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment",1)))));
 
 		Document document = converter.convert(testBoard);
 		collection.insertOne(document);
 
-		Document testDoc = new Document("aaaa", "aaa");
-		collection.insertOne(testDoc);
+//		Document testDoc = new Document("aaaa", "aaa");
+//		collection.insertOne(testDoc);
 	}
 }
