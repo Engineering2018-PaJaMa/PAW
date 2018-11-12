@@ -27,8 +27,7 @@ public class Converter
 
 		return new Document("boardId", board.getId()).append("name", board.getName())
 				.append("state", board.getState())
-				.append("visibility", board.getVisibilty())
-				.append("userId", board.getUserId()).append("lists", lists);
+				.append("visibility", board.getVisibilty()).append("userId", board.getUserId()).append("lists", lists);
 	}
 
 	public Document convert(Listing list)
@@ -39,8 +38,7 @@ public class Converter
 				.append("description", list.getDescription())
 				.append("boardId", list.getBoardId())
 				.append("position", list.getPosition())
-				.append("state", list.getState())
-				.append("visibility", list.getVisibility()).append("card", cards);
+				.append("state", list.getState()).append("visibility", list.getVisibility()).append("card", cards);
 	}
 
 	public Document convert(Card card)
@@ -49,13 +47,13 @@ public class Converter
 
 		return new Document("cardId", card.getId()).append("title", card.getTitle())
 				.append("description", card.getDescription())
-				.append("listId", card.getListId())
-				.append("position", card.getPostion()).append("comment", comments);
+				.append("listId", card.getListId()).append("position", card.getPostion()).append("comment", comments);
 	}
 
 	public Document convert(Comment comment)
 	{
 		return new Document("id", comment.getId()).append("title", comment.getTitle())
-				.append("message", comment.getMessage()).append("position", comment.getPosition());
+				.append("message", comment.getMessage())
+				.append("position", comment.getPosition());
 	}
 }
