@@ -1,5 +1,7 @@
 package Representation;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,6 @@ public class Card
 	private String description;
 	private int listId;
 	private int postion;
-	private Comment comment;
+	private List<Comment> comments;
 
 }

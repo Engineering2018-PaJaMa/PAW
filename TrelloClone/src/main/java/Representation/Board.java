@@ -4,19 +4,16 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.bson.Document;
 import org.hibernate.validator.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Board extends Document
+public class Board
 {
 	@NotNull
 	private int id;

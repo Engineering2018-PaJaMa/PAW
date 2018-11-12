@@ -43,7 +43,10 @@ public class ConnectDatabase
 				"titleList",
 				"descList",
 				5,
-				1, "stateList", "visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment")))));
+				1,
+				"stateList",
+				"visibilityList",
+				List.of(new Card(1, "titleCard", "descCard", 5, 1, List.of(new Comment(1, "titleComment", "messageComment", 1)))))));
 
 		collection.insertOne(converter.convert(testBoard));
 	}
