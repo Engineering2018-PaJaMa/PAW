@@ -15,10 +15,11 @@ public class DatabaseController
 	private MongoClient mongo;
 	private MongoDatabase database;
 
-	public void setUpConnection()
+	public DatabaseController setUpConnection()
 	{
 		mongo = new MongoClient(new ServerAddress(host, port));
 		database = mongo.getDatabase("TrelloClone");
+		return this;
 	}
 
 	public MongoCollection<Document> getCollection(String collectionName)

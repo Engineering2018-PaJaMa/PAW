@@ -14,5 +14,5 @@ public abstract class EndpointController
 {
 	final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	Validator validator;
-	DatabaseController databaseController;
+	DatabaseController databaseController = new DatabaseController().setUpConnection();
 }
