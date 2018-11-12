@@ -1,6 +1,6 @@
 package Representation;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
@@ -27,5 +27,5 @@ public class Board extends Document
 	private String state;
 	private String visibilty;
 	private int userId;
-	private Set<List> lists;
+	private List<Listing> lists;
 }

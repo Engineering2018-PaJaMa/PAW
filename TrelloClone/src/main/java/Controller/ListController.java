@@ -16,14 +16,14 @@ public class ListController extends EndpointController
 
 	//	@PermitAll
 	//	@GET
-	//	public Optional<Document> getListById(@PathParam("id") final String id)
+	//	public Optional<Document> getListById(@PathParam("id") final int id)
 	//	{
 	//		LOGGER.info("Returning info from database of list with id: {}", id);
 	//		return Optional.ofNullable(databaseController.getCollection("lists").find(eq("listId", id)).first());
 	//	}
 
 	//	@POST
-	//	public List createListById(@PathParam("id") final String id)
+	//	public Listing createListById(@PathParam("id") final int id)
 	//	{
 	//		I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
 	//		LOGGER.info("Creating list for id: {}", id);
@@ -35,11 +35,11 @@ public class ListController extends EndpointController
 	//				.append("visibility", "listVisibility")
 	//				.append("cards", null);
 	//		databaseController.getCollection("lists").insertOne(document);
-	//		return new List(Integer.valueOf(id), "listTittle", "listDesc", 1, 10, "listState", "listVisibility", new Card());
+	//		return new Listing(Integer.valueOf(id), "listTittle", "listDesc", 1, 10, "listState", "listVisibility", new Card());
 	//	}
 	//
 	//	@DELETE
-	//	public Document removeListById(@PathParam("id") final String id)
+	//	public Document removeListById(@PathParam("id") final int id)
 	//	{
 	//		LOGGER.info("Deleting from database list with id: {}", id);
 	//		return databaseController.getCollection("lists").findOneAndDelete(eq("listId", id));
