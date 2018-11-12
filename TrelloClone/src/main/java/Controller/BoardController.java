@@ -2,8 +2,8 @@ package Controller;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.annotation.security.PermitAll;
 import javax.validation.Validator;
@@ -18,7 +18,9 @@ import javax.ws.rs.core.MediaType;
 import org.bson.Document;
 
 import Representation.Board;
-import Representation.List;
+import Representation.Card;
+import Representation.Comment;
+import Representation.Listing;
 
 @Path("/boards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,30 +33,35 @@ public class BoardController extends EndpointController
 
 	@PermitAll
 	@GET
-	public Optional<Document> getBoard(@PathParam("id") final String id)
+	public Optional<Document> getBoard(@PathParam("id") final int id)
 	{
 		LOGGER.info("Returning info from database for board: {}", id);
 		return Optional.ofNullable(databaseController.getCollection("boards").find(eq("boardId", id)).first());
 	}
 
 	@POST
-	public Board createBoardById(@PathParam("id") final String id)
+	public Board createBoardById(@PathParam("id") final int id)
 	{
 		//I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
 		LOGGER.info("Creating board with id: {}", id);
-		Document document = new Document("boardId", id).append("name", "boardName")
-				.append("state", "boardState")
-				.append("visibility", "boardVisibility")
-				.append("userId", "1")
-				.append("lists", null);
-		databaseController.getCollection("boards").insertOne(document);
-		return new Board(Integer.valueOf(id), "boardName", "boardState", "boardVisibility", 1, Set.of(new List()));
+		Board board = new Board(id, "boardName", "boardState", "boardVisibility", 1, List.of(new Listing(
+				1,
+				"titleList",
+				"descList",
+				5,
+				1,
+				"stateList",
+				"visibilityList",
+				new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment")))));
+
+		databaseController.getCollection("boards").insertOne(converter.convert(board));
+		return board;
 	}
 
 	@DELETE
-	public Document deleteBoardById(@PathParam("id") final String id)
+	public Document deleteBoardById(@PathParam("id") final int id)
 	{
 		LOGGER.info("Deleting board with id: {}", id);
-		return databaseController.getCollection("boardId").findOneAndDelete(eq("boardId", id));
+		return databaseController.getCollection("boards").findOneAndDelete(eq("boardId", id));
 	}
 }

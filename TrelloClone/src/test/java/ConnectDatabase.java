@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 import org.bson.Document;
 
@@ -12,7 +12,7 @@ import Converter.Converter;
 import Representation.Board;
 import Representation.Card;
 import Representation.Comment;
-import Representation.List;
+import Representation.Listing;
 
 public class ConnectDatabase
 {
@@ -22,19 +22,13 @@ public class ConnectDatabase
 
 	public static void main(final String[] args)
 	{
-		createConnection();
 		addTestUser();
 		addTestBoard();
 	}
 
-	public static void createConnection()
-	{
-		database.createCollection("users");//, new CreateCollectionOptions().validationOptions(usersOptions));
-		database.createCollection("boards");
-	}
-
 	private static void addTestUser()
 	{
+		database.createCollection("users");
 		MongoCollection<Document> collection = database.getCollection("users");
 		Document document = new Document("username", "admin").append("password", "admin").append("registerDate", LocalDate.now().toString());
 		collection.insertOne(document);
@@ -42,21 +36,15 @@ public class ConnectDatabase
 
 	private static void addTestBoard()
 	{
+		database.createCollection("boards");
 		MongoCollection<Document> collection = database.getCollection("boards");
 
-		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1,
-				Set.of(new List(1,
+		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1, List.of(new Listing(1,
 				"titleList",
 				"descList",
 				5,
-				1,
-				"stateList",
-				"visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment",1)))));
+				1, "stateList", "visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment")))));
 
-		Document document = converter.convert(testBoard);
-		collection.insertOne(document);
-
-//		Document testDoc = new Document("aaaa", "aaa");
-//		collection.insertOne(testDoc);
+		collection.insertOne(converter.convert(testBoard));
 	}
 }

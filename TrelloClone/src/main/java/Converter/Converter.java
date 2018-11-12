@@ -5,7 +5,7 @@ import org.bson.Document;
 import Representation.Board;
 import Representation.Card;
 import Representation.Comment;
-import Representation.List;
+import Representation.Listing;
 import Representation.User;
 
 /**
@@ -27,7 +27,7 @@ public class Converter
 				.append("lists", board.getLists());
 	}
 
-	public Document convert(List list)
+	public Document convert(Listing list)
 	{
 		return new Document("listId", list.getId()).append("title", list.getTitle())
 				.append("description", list.getDescription())
