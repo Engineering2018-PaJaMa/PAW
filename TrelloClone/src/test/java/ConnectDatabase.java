@@ -22,19 +22,13 @@ public class ConnectDatabase
 
 	public static void main(final String[] args)
 	{
-		createConnection();
 		addTestUser();
 		addTestBoard();
 	}
 
-	public static void createConnection()
-	{
-		database.createCollection("users");//, new CreateCollectionOptions().validationOptions(usersOptions));
-		database.createCollection("boards");
-	}
-
 	private static void addTestUser()
 	{
+		database.createCollection("users");
 		MongoCollection<Document> collection = database.getCollection("users");
 		Document document = new Document("username", "admin").append("password", "admin").append("registerDate", LocalDate.now().toString());
 		collection.insertOne(document);
@@ -42,6 +36,7 @@ public class ConnectDatabase
 
 	private static void addTestBoard()
 	{
+		database.createCollection("boards");
 		MongoCollection<Document> collection = database.getCollection("boards");
 
 		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1, Set.of(new List(1,
@@ -49,8 +44,7 @@ public class ConnectDatabase
 				"descList",
 				5,
 				1,
-				"stateList",
-				"visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment")))));
+				"stateList", "visibilityList", new Card(1, "titleCard", "descCard", 5, 1, new Comment(1, "titleComment", "messageComment")))));
 
 		Document document = converter.convert(testBoard);
 		collection.insertOne(document);
