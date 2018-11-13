@@ -1,32 +1,27 @@
-<!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<html>
-    
-    <body>
 
-        <div style="text-align: center" class="exampleBoard">
-          <h2>{{name | uppercase}} Board</h2>
-          <span>Description: {{desc}}</span>
+<div class="card-group">
+        <div class="card">         
+          <div class="card-body">
+              <app-card></app-card>
         </div>
-
-        <div style="text-align: center">
-            <label for="name">Name</label>
-            <input type="text" class="board" id="name" [(ngModel)]="name" name="name">
+        <div class="row">
+        <div class="col">
+            <input type="text" id="name" class="form-control input-sm chat-input" placeholder="Board Name" />
+            <input type="text" id="desc" class="form-control input-sm chat-input" placeholder="Description" />
+            <button (click)="addBoard(name,desc)" class="btn btn-primary">Add Card</button>
         </div>
-
-        <div style="text-align: center">
-            <label for="desc">Short description</label>
-            <input type="text" class="board" id="desc" [(ngModel)]="desc" name="desc">
+        <div class="col">
+            <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Card</button>
         </div>
-            
-        <div style="text-align: center" class="btn-group-horizontal" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" (onClick)=addBoard(name.value,desc.value)>Save</button>
-            <button type="button" class="btn btn-default" routerLink="/list">Create list</button>
-            <button type="button" class="btn btn-default" routerLink="">Home</button>
-        </div>
-        
-    </body>
-
-</html>
+    </div>
+</div>
 
 
