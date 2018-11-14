@@ -10,7 +10,14 @@ export class AppUserService {
 constructor(private http: HttpClient) { }
 
 getById(user: User) {
-    return this.http.get(`http://localhost:8080/users/` + user.name);
+    return this.http.get(`http://localhost:8080/users/` + user.name)
+    .subscribe(
+        res => {
+          console.log(res);
+        },
+        data =>{
+            console.log(data);
+        });;
 }
 
 register(user: User) {
