@@ -16,7 +16,7 @@ public class CardController extends EndpointController
 {
 	public CardController(final Validator validator)
 	{
-		this.validator = validator;
+		super(validator);
 	}
 
 	@GET

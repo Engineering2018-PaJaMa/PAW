@@ -18,14 +18,14 @@ public class Converter
 {
 	public Document convert(User user)
 	{
-		return new Document("name", user.getName()).append("password", user.getPassword()).append("roles", user.getRoles());
+		return new Document("username", user.getUsername()).append("password", user.getPassword()).append("roles", user.getRoles());
 	}
 
 	public Document convert(Board board)
 	{
 		List lists = board.getLists().stream().map(this::convert).collect(Collectors.toList());
 
-		return new Document("boardId", board.getId()).append("name", board.getName())
+		return new Document("boardId", board.getId()).append("username", board.getName())
 				.append("state", board.getState())
 				.append("visibility", board.getVisibilty()).append("userId", board.getUserId()).append("lists", lists);
 	}
