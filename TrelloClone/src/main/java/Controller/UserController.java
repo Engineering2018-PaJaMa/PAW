@@ -2,13 +2,12 @@ package Controller;
 
 import static com.mongodb.client.model.Filters.eq;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,11 +21,12 @@ import Representation.User;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class UserController extends EndpointController
 {
 	public UserController(final Validator validator)
 	{
-		this.validator = validator;
+		super(validator);
 	}
 
 	@GET
@@ -39,13 +39,14 @@ public class UserController extends EndpointController
 
 	@POST
 	@Path("/register")
-	public User register(@FormParam("username") final String username, @FormParam("password") final String password)
+	public User register(final String json) throws IOException
 	{
-		LOGGER.info("Creating data for user: {}", username);
-		Document document = new Document("username", username).append("password", password).append("registerDate", LocalDate.now().toString());
-		databaseController.getCollection("users").insertOne(document);
+		User user = objectMapper.readValue(json, User.class);
 
-		return new User(username, password, Set.of("READ_ROLE"));
+		LOGGER.info("Creating data for user: {}", user.getUsername());
+		databaseController.getCollection("users").insertOne(converter.convert(user));
+
+		return user;
 	}
 
 	@DELETE

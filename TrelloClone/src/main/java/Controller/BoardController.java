@@ -17,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
 
+import com.mongodb.client.MongoCollection;
+
 import Representation.Board;
 import Representation.Card;
 import Representation.Comment;
@@ -26,9 +28,12 @@ import Representation.Listing;
 @Produces(MediaType.APPLICATION_JSON)
 public class BoardController extends EndpointController
 {
+	private MongoCollection<Document> collection;
+
 	public BoardController(final Validator validator)
 	{
-		this.validator = validator;
+		super(validator);
+		collection = databaseController.getCollection("boards");
 	}
 
 	@PermitAll
@@ -36,13 +41,17 @@ public class BoardController extends EndpointController
 	public Optional<Document> getBoard(@PathParam("id") final int id)
 	{
 		LOGGER.info("Returning info from database for board: {}", id);
-		return Optional.ofNullable(databaseController.getCollection("boards").find(eq("boardId", id)).first());
+		return Optional.ofNullable(collection.find(eq("boardId", id)).first());
 	}
 
 	@POST
 	public Board createBoardById(@PathParam("id") final int id)
 	{
 		//I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
+		//Another idea which I like better right now is to use ObjectMapper and convert whole json to Board.class but who teh fuck cares
+		//No one reads what i type there so I'll decide
+		//I like banananas
+		//Second one is B E T T E R
 		LOGGER.info("Creating board with id: {}", id);
 		Board board = new Board(id, "boardName", "boardState", "boardVisibility", 1, List.of(new Listing(
 				1,
@@ -51,9 +60,10 @@ public class BoardController extends EndpointController
 				5,
 				1,
 				"stateList",
-				"visibilityList", List.of(new Card(1, "titleCard", "descCard", 5, 1, List.of(new Comment(1, "titleComment", "messageComment", 1)))))));
+				"visibilityList",
+				List.of(new Card(1, "titleCard", "descCard", 5, 1, List.of(new Comment(1, "titleComment", "messageComment", 1)))))));
 
-		databaseController.getCollection("boards").insertOne(converter.convert(board));
+		collection.insertOne(converter.convert(board));
 		return board;
 	}
 
@@ -61,6 +71,6 @@ public class BoardController extends EndpointController
 	public Document deleteBoardById(@PathParam("id") final int id)
 	{
 		LOGGER.info("Deleting board with id: {}", id);
-		return databaseController.getCollection("boards").findOneAndDelete(eq("boardId", id));
+		return collection.findOneAndDelete(eq("boardId", id));
 	}
 }

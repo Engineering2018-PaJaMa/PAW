@@ -1,47 +1,55 @@
 package Controller;
 
+import static com.mongodb.client.model.Filters.eq;
+
+import java.util.Optional;
+
+import javax.annotation.security.PermitAll;
 import javax.validation.Validator;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/boards/{id}/lists/{id}")
+import org.bson.Document;
+
+import Representation.Listing;
+
+@Path("/boards/{boardId}/lists/{id}")
 @Produces(MediaType.APPLICATION_JSON)
 public class ListController extends EndpointController
 {
 	public ListController(final Validator validator)
 	{
-		this.validator = validator;
+		super(validator);
 	}
 
-	//	@PermitAll
-	//	@GET
-	//	public Optional<Document> getListById(@PathParam("id") final int id)
-	//	{
-	//		LOGGER.info("Returning info from database of list with id: {}", id);
-	//		return Optional.ofNullable(databaseController.getCollection("lists").find(eq("listId", id)).first());
-	//	}
+	@PermitAll
+	@GET
+	public Optional<Document> getListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	{
+		LOGGER.info("Returning info for boardId: {} for listId: {}", boardId, listId);
+		return Optional.ofNullable(databaseController.getCollection("lists").find(eq("listId", listId)).first());
+	}
 
-	//	@POST
-	//	public Listing createListById(@PathParam("id") final int id)
-	//	{
-	//		I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
-	//		LOGGER.info("Creating list for id: {}", id);
-	//		Document document = new Document("listId", id).append("title", "listTittle")
-	//				.append("description", "listDesc")
-	//				.append("boardId", "1")
-	//				.append("position", "10")
-	//				.append("state", "listState")
-	//				.append("visibility", "listVisibility")
-	//				.append("cards", null);
-	//		databaseController.getCollection("lists").insertOne(document);
-	//		return new Listing(Integer.valueOf(id), "listTittle", "listDesc", 1, 10, "listState", "listVisibility", new Card());
-	//	}
-	//
-	//	@DELETE
-	//	public Document removeListById(@PathParam("id") final int id)
-	//	{
-	//		LOGGER.info("Deleting from database list with id: {}", id);
-	//		return databaseController.getCollection("lists").findOneAndDelete(eq("listId", id));
-	//	}
+	@POST
+	public Listing createListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	{
+		//I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
+		//getboardFromDatabase
+		//Add list to that board
+		Listing list = new Listing();
+		LOGGER.info("Creating list for boardId: {}, listId: {}", boardId, listId);
+		return list;
+	}
+
+	@DELETE
+	public Document removeListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	{
+		LOGGER.info("Deleting from database list for boardId: {}, with listId: {}", boardId, listId);
+		return databaseController.getCollection("lists").findOneAndDelete(eq("listId", listId));
+	}
 }

@@ -16,7 +16,7 @@ public class CommentController extends EndpointController
 {
 	public CommentController(final Validator validator)
 	{
-		this.validator = validator;
+		super(validator);
 	}
 
 	@GET
