@@ -1,19 +1,28 @@
-<!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<html>
-    
-    <body>
+<div class="row">
 
-      <div style="text-align:center">
-        <h1>
-          Welcome to {{ title }}!
-        </h1>
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">{{board.name}}</h6>
+        <p class="card-text">{{board.desc}}</p>
+        <div class="col-sm-6">
+          <a routerLink="/board" class="btn btn-primary">Enter Board</a>
+        </div>
+        <div class="col-sm-6">
+          <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Board</button>
+        </div>
       </div>
-
-      <div style="text-align: center">
-        <button type="button" class="btn btn-default" routerLink="/board">Create new board</button>
-      </div>
-
-  </body>
-  
-  </html>
+    </div>
+  </div>
+  <input type="text" id="name" [(ngModel)]="board.name" placeholder="Name of the Board" />
+  <input type="text" id="desc" [(ngModel)]="board.desc" placeholder="Description" />
+  <button (click)="addBoard(name,desc)" class="btn btn-primary bg-info" >Create Board</button>
+</div>

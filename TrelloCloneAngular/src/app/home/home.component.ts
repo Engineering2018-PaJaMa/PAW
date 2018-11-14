@@ -8,16 +8,24 @@ import { Board } from '../board';
 })
 export class HomeComponent implements OnInit {
 
-  title = 'TrelloCloneAngular';
-  boards: Array<Board>;
+  board : Board = {
+    name:"",
+    desc:""
+  };
+  boards : Board[];
 
   constructor() { }
 
   ngOnInit() {
-    this.getBoard();
+    //this.board = new Board(this.name,this.desc);
   }
 
-  getBoard(): void{
+  deleteBoard(){
   }
 
+  addBoard(nameBoard,descBoard){
+    this.board.name = nameBoard;
+    this.board.desc = descBoard;
+    this.boards.fill(this.board);
+  }
 }
