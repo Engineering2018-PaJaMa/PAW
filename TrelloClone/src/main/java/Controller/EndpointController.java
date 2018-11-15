@@ -1,9 +1,9 @@
 package Controller;
 
-import javax.validation.Validator;
+import java.io.IOException;
+import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.bson.Document;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,19 +11,17 @@ import Converter.Converter;
 import MongoDB.DatabaseController;
 
 /**
- * Created by Paweł Szopa on 10/11/2018
+ * Created by Paweł Szopa on 15/11/2018
  */
-public abstract class EndpointController
+public interface EndpointController
 {
-	final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-	final DatabaseController databaseController = new DatabaseController().setUpConnection();
-	final ObjectMapper objectMapper = new ObjectMapper();
-	final Converter converter = new Converter();
+	DatabaseController databaseController = new DatabaseController().setUpConnection();
+	ObjectMapper objectMapper = new ObjectMapper();
+	Converter converter = new Converter();
 
-	final Validator validator;
+	Optional<Document> get(String name);
 
-	public EndpointController(final Validator validator)
-	{
-		this.validator = validator;
-	}
+	Object create(String json) throws IOException;
+
+	Document delete(String name);
 }

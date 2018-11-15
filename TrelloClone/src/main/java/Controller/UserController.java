@@ -16,42 +16,52 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mongodb.client.MongoCollection;
 
 import Representation.DTO.User;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UserController extends EndpointController
+public class UserController implements EndpointController
 {
+	private Validator validator;
+	private MongoCollection<Document> collection;
+	private Logger logger;
+
 	public UserController(final Validator validator)
 	{
-		super(validator);
+		this.validator = validator;
+		collection = databaseController.getCollection("users");
+		logger = LoggerFactory.getLogger(UserController.class);
 	}
 
 	@GET
 	@Path("/{username}")
-	public Optional<Document> getUser(@PathParam("username") final String username)
+	public Optional<Document> get(@PathParam("username") final String username)
 	{
-		LOGGER.info("Returning info from database for user: {}", username);
-		return Optional.ofNullable(databaseController.getCollection("users").find(eq("username", username)).first());
+		logger.info("Returning info from database for user: {}", username);
+		return Optional.ofNullable(collection.find(eq("username", username)).first());
 	}
 
 	@POST
 	@Path("/register")
-	public User register(final String json) throws IOException
+	public User create(final String json) throws IOException
 	{
 		User user = objectMapper.readValue(json, User.class);
-		LOGGER.info("Creating data for user: {}", user.getUsername());
-		databaseController.getCollection("users").insertOne(converter.convert(user));
+		logger.info("Creating data for user: {}", user.getUsername());
+		collection.insertOne(converter.convert(user));
 		return user;
 	}
 
 	@DELETE
 	@Path("/{username}")
-	public Document deleteUserByUsername(@PathParam("username") final String username)
+	public Document delete(@PathParam("username") final String username)
 	{
-		LOGGER.info("Deleting from database user: {}", username);
-		return databaseController.getCollection("users").findOneAndDelete(eq("username", username));
+		logger.info("Deleting from database user: {}", username);
+		return collection.findOneAndDelete(eq("username", username));
 	}
 }

@@ -5,7 +5,6 @@ import static com.mongodb.client.model.Filters.eq;
 import java.io.IOException;
 import java.util.Optional;
 
-import javax.annotation.security.PermitAll;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,45 +16,54 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.mongodb.client.MongoCollection;
 
 import Representation.DTO.Board;
 
-@Path("/boards/{id}")
+@Path("/boards")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class BoardController extends EndpointController
+public class BoardController implements EndpointController
 {
+	private Validator validator;
 	private MongoCollection<Document> collection;
+	private Logger logger;
 
 	public BoardController(final Validator validator)
 	{
-		super(validator);
+		this.validator = validator;
 		collection = databaseController.getCollection("boards");
+		logger = LoggerFactory.getLogger(BoardController.class);
 	}
 
-	@PermitAll
 	@GET
-	public Optional<Document> getBoard(@PathParam("id") final int id)
+	@Path("/{name}")
+	@Override
+	public Optional<Document> get(@PathParam("name") final String name)
 	{
-		LOGGER.info("Returning info from database for board: {}", id);
-		return Optional.ofNullable(collection.find(eq("boardId", id)).first());
+		logger.info("Returning info from database for board {}", name);
+		return Optional.ofNullable(collection.find(eq("name", name)).first());
 	}
 
 	@POST
-	public Board createBoardById(final String json) throws IOException
+	@Override
+	public Board create(final String json) throws IOException
 	{
 		Board board = objectMapper.readValue(json, Board.class);
-		LOGGER.info("Creating board with id: {}", board.getId());
+		logger.info("Creating board {}", board.getName());
 		collection.insertOne(converter.convert(board));
 		return board;
 	}
 
 	@DELETE
-	public Document deleteBoardById(@PathParam("id") final int id)
+	@Path("/{name}")
+	@Override
+	public Document delete(@PathParam("name") final String name)
 	{
-		LOGGER.info("Deleting board with id: {}", id);
-		return collection.findOneAndDelete(eq("boardId", id));
+		logger.info("Deleting board {}", name);
+		return collection.findOneAndDelete(eq("name", name));
 	}
 }
