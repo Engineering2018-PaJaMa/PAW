@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 public class Board
 {
 	private int id;
-	private String name;
-	private String state;
-	private String visibilty;
 	private int userId;
+	private String name;
+	private String description;
+	private String state;
+	private String visibility;
 }

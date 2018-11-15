@@ -40,7 +40,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("boards");
 		MongoCollection<Document> collection = database.getCollection("boards");
-		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1);
+		Board testBoard = new Board(1, 1, "boardName", "boardDescription", "boardState", "boardVisibility");
 		collection.insertOne(converter.convert(testBoard));
 	}
 
@@ -48,7 +48,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("lists");
 		MongoCollection<Document> collection = database.getCollection("lists");
-		List list = new List(1, "ListTitle", "ListDesc", 1, 1, "newState", "visible");
+		List list = new List(1, 1, "listName", "listDesc", 1, "listState", "listVisibility");
 		collection.insertOne(converter.convert(list));
 	}
 
@@ -56,7 +56,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("cards");
 		MongoCollection<Document> collection = database.getCollection("cards");
-		Card card = new Card(1, "cardTitle", "cardDesc", 1, 1);
+		Card card = new Card(1, 1, "cardName", "cardDescription", 1, "cardState", "cardVisibility");
 		collection.insertOne(converter.convert(card));
 	}
 
@@ -64,7 +64,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("comments");
 		MongoCollection<Document> collection = database.getCollection("comments");
-		Comment comment = new Comment(1, "commentTitle", "commentMessage", 1);
+		Comment comment = new Comment(1, 1, "commentName", "commentDescription");
 		collection.insertOne(converter.convert(comment));
 	}
 }

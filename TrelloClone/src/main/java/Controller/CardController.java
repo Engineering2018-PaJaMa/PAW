@@ -1,6 +1,7 @@
 package Controller;
 
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,6 +13,7 @@ import Representation.DTO.Card;
 
 @Path("/boards/{id}/lists/{id}/cards/{id}")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class CardController extends EndpointController
 {
 	public CardController(final Validator validator)

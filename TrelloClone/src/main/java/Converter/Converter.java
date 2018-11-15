@@ -20,28 +20,37 @@ public class Converter
 
 	public Document convert(Board board)
 	{
-		return new Document("boardId", board.getId()).append("username", board.getName())
-				.append("state", board.getState()).append("visibility", board.getVisibilty()).append("userId", board.getUserId());
+		return new Document("id", board.getId()).append("userId", board.getUserId())
+				.append("name", board.getName())
+				.append("description", board.getDescription())
+				.append("state", board.getState())
+				.append("visibility", board.getVisibility());
 	}
 
 	public Document convert(List list)
 	{
-		return new Document("listId", list.getId()).append("title", list.getTitle())
+		return new Document("id", list.getId()).append("boardId", list.getBoardId())
+				.append("name", list.getName())
 				.append("description", list.getDescription())
-				.append("boardId", list.getBoardId())
-				.append("position", list.getPosition()).append("state", list.getState()).append("visibility", list.getVisibility());
+				.append("position", list.getPosition())
+				.append("state", list.getState())
+				.append("visibility", list.getVisibility());
 	}
 
 	public Document convert(Card card)
 	{
-		return new Document("cardId", card.getId()).append("title", card.getTitle())
-				.append("description", card.getDescription()).append("listId", card.getListId()).append("position", card.getPostion());
+		return new Document("id", card.getId()).append("listId", card.getListId())
+				.append("name", card.getName())
+				.append("description", card.getDescription())
+				.append("position", card.getPosition())
+				.append("state", card.getState())
+				.append("visibility", card.getVisibility());
 	}
 
 	public Document convert(Comment comment)
 	{
-		return new Document("id", comment.getId()).append("title", comment.getTitle())
-				.append("message", comment.getMessage())
-				.append("position", comment.getPosition());
+		return new Document("id", comment.getId()).append("cardId", comment.getCardId())
+				.append("name", comment.getName())
+				.append("description", comment.getDescription());
 	}
 }
