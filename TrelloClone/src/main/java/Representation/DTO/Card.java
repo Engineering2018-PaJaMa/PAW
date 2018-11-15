@@ -1,6 +1,4 @@
-package Representation;
-
-import java.util.List;
+package Representation.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class Card
 {
 	private int id;
-	private String title;
-	private String description;
 	private int listId;
-	private int postion;
-	private List<Comment> comments;
-
+	private String name;
+	private String description;
+	private int position;
+	private String state;
+	private String visibility;
 }
