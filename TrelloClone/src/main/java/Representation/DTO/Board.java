@@ -1,10 +1,4 @@
-package Representation;
-
-import java.util.List;
-
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
+package Representation.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,14 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Board
 {
-	@NotNull
 	private int id;
-
-	@NotBlank
 	private String name;
-
 	private String state;
 	private String visibilty;
 	private int userId;
-	private List<Listing> lists;
 }

@@ -1,6 +1,4 @@
-package Representation;
-
-import java.util.List;
+package Representation.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card
+public class List
 {
 	private int id;
 	private String title;
 	private String description;
-	private int listId;
-	private int postion;
-	private List<Comment> comments;
-
+	private int boardId;
+	private int position;
+	private String state;
+	private String visibility;
 }

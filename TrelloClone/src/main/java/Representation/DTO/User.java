@@ -1,4 +1,4 @@
-package Representation;
+package Representation.DTO;
 
 import java.util.Set;
 

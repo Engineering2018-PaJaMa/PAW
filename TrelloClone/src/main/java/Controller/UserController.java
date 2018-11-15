@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
 
-import Representation.User;
+import Representation.DTO.User;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -42,10 +42,8 @@ public class UserController extends EndpointController
 	public User register(final String json) throws IOException
 	{
 		User user = objectMapper.readValue(json, User.class);
-
 		LOGGER.info("Creating data for user: {}", user.getUsername());
 		databaseController.getCollection("users").insertOne(converter.convert(user));
-
 		return user;
 	}
 

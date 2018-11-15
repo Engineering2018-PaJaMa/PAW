@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.List;
 
 import org.bson.Document;
 
@@ -9,10 +8,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import Converter.Converter;
-import Representation.Board;
-import Representation.Card;
-import Representation.Comment;
-import Representation.Listing;
+import Representation.DTO.Board;
+import Representation.DTO.Card;
+import Representation.DTO.Comment;
+import Representation.DTO.List;
 
 public class ConnectDatabase
 {
@@ -24,6 +23,9 @@ public class ConnectDatabase
 	{
 		addTestUser();
 		addTestBoard();
+		addTestList();
+		addTestCard();
+		addTestComment();
 	}
 
 	private static void addTestUser()
@@ -38,16 +40,31 @@ public class ConnectDatabase
 	{
 		database.createCollection("boards");
 		MongoCollection<Document> collection = database.getCollection("boards");
-
-		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1, List.of(new Listing(1,
-				"titleList",
-				"descList",
-				5,
-				1,
-				"stateList",
-				"visibilityList",
-				List.of(new Card(1, "titleCard", "descCard", 5, 1, List.of(new Comment(1, "titleComment", "messageComment", 1)))))));
-
+		Board testBoard = new Board(1, "nameBoard", "stateBoard", "visibilityBoard", 1);
 		collection.insertOne(converter.convert(testBoard));
+	}
+
+	private static void addTestList()
+	{
+		database.createCollection("lists");
+		MongoCollection<Document> collection = database.getCollection("lists");
+		List list = new List(1, "ListTitle", "ListDesc", 1, 1, "newState", "visible");
+		collection.insertOne(converter.convert(list));
+	}
+
+	private static void addTestCard()
+	{
+		database.createCollection("cards");
+		MongoCollection<Document> collection = database.getCollection("cards");
+		Card card = new Card(1, "cardTitle", "cardDesc", 1, 1);
+		collection.insertOne(converter.convert(card));
+	}
+
+	private static void addTestComment()
+	{
+		database.createCollection("comments");
+		MongoCollection<Document> collection = database.getCollection("comments");
+		Comment comment = new Comment(1, "commentTitle", "commentMessage", 1);
+		collection.insertOne(converter.convert(comment));
 	}
 }

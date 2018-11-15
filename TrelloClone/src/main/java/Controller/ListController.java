@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
 
-import Representation.Listing;
+import Representation.DTO.List;
 
 @Path("/boards/{boardId}/lists/{id}")
 @Produces(MediaType.APPLICATION_JSON)
@@ -36,12 +36,12 @@ public class ListController extends EndpointController
 	}
 
 	@POST
-	public Listing createListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	public List createListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
 	{
 		//I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
 		//getboardFromDatabase
 		//Add list to that board
-		Listing list = new Listing();
+		List list = new List();
 		LOGGER.info("Creating list for boardId: {}, listId: {}", boardId, listId);
 		return list;
 	}

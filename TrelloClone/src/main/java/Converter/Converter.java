@@ -1,15 +1,12 @@
 package Converter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.bson.Document;
 
-import Representation.Board;
-import Representation.Card;
-import Representation.Comment;
-import Representation.Listing;
-import Representation.User;
+import Representation.DTO.Board;
+import Representation.DTO.Card;
+import Representation.DTO.Comment;
+import Representation.DTO.List;
+import Representation.DTO.User;
 
 /**
  * Created by Paweł Szopa on 11/11/2018
@@ -23,31 +20,22 @@ public class Converter
 
 	public Document convert(Board board)
 	{
-		List lists = board.getLists().stream().map(this::convert).collect(Collectors.toList());
-
 		return new Document("boardId", board.getId()).append("username", board.getName())
-				.append("state", board.getState())
-				.append("visibility", board.getVisibilty()).append("userId", board.getUserId()).append("lists", lists);
+				.append("state", board.getState()).append("visibility", board.getVisibilty()).append("userId", board.getUserId());
 	}
 
-	public Document convert(Listing list)
+	public Document convert(List list)
 	{
-		List cards = list.getCards().stream().map(this::convert).collect(Collectors.toList());
-
 		return new Document("listId", list.getId()).append("title", list.getTitle())
 				.append("description", list.getDescription())
 				.append("boardId", list.getBoardId())
-				.append("position", list.getPosition())
-				.append("state", list.getState()).append("visibility", list.getVisibility()).append("card", cards);
+				.append("position", list.getPosition()).append("state", list.getState()).append("visibility", list.getVisibility());
 	}
 
 	public Document convert(Card card)
 	{
-		List comments = card.getComments().stream().map(this::convert).collect(Collectors.toList());
-
 		return new Document("cardId", card.getId()).append("title", card.getTitle())
-				.append("description", card.getDescription())
-				.append("listId", card.getListId()).append("position", card.getPostion()).append("comment", comments);
+				.append("description", card.getDescription()).append("listId", card.getListId()).append("position", card.getPostion());
 	}
 
 	public Document convert(Comment comment)

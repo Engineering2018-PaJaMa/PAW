@@ -8,7 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import Representation.Card;
+import Representation.DTO.Card;
 
 @Path("/boards/{id}/lists/{id}/cards/{id}/comment/{id}")
 @Produces(MediaType.APPLICATION_JSON)
