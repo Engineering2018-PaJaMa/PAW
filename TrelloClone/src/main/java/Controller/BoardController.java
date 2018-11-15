@@ -49,6 +49,7 @@ public class BoardController implements EndpointController
 	}
 
 	@POST
+	@Path("/create")
 	@Override
 	public Board create(final String json) throws IOException
 	{

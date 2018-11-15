@@ -49,6 +49,7 @@ public class CommentController implements EndpointController
 	}
 
 	@POST
+	@Path("/create")
 	@Override
 	public Comment create(final String json) throws IOException
 	{

@@ -49,6 +49,7 @@ public class CardController implements EndpointController
 	}
 
 	@POST
+	@Path("/create")
 	@Override
 	public Card create(final String json) throws IOException
 	{

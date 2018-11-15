@@ -49,6 +49,7 @@ public class ListController implements EndpointController
 	}
 
 	@POST
+	@Path("/create")
 	@Override
 	public List create(final String json) throws IOException
 	{
