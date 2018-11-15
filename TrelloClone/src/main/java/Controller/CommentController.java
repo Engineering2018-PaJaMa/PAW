@@ -1,39 +1,69 @@
 package Controller;
 
+import static com.mongodb.client.model.Filters.eq;
+
+import java.io.IOException;
+import java.util.Optional;
+
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import Representation.DTO.Card;
+import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Path("/boards/{id}/lists/{id}/cards/{id}/comment/{id}")
+import com.mongodb.client.MongoCollection;
+
+import Representation.DTO.Comment;
+
+@Path("/comments")
 @Produces(MediaType.APPLICATION_JSON)
-public class CommentController extends EndpointController
+@Consumes(MediaType.APPLICATION_JSON)
+public class CommentController implements EndpointController
 {
+	private Validator validator;
+	private MongoCollection<Document> collection;
+	private Logger logger;
+
 	public CommentController(final Validator validator)
 	{
-		super(validator);
+		this.validator = validator;
+		collection = databaseController.getCollection("comments");
+		logger = LoggerFactory.getLogger(CommentController.class);
 	}
 
 	@GET
-	public Card getComment()
+	@Path("/{name}")
+	@Override
+	public Optional<Document> get(@PathParam("name") final String name)
 	{
-		return new Card();
+		logger.info("Returning info from database for comment {}", name);
+		return Optional.ofNullable(collection.find(eq("name", name)).first());
 	}
 
 	@POST
-	public Card createComment()
+	@Override
+	public Comment create(final String json) throws IOException
 	{
-		return new Card();
+		Comment comment = objectMapper.readValue(json, Comment.class);
+		logger.info("Creating comment {}", comment.getName());
+		collection.insertOne(converter.convert(comment));
+		return comment;
 	}
 
 	@DELETE
-	public Card removeCommentById()
+	@Path("/{name}")
+	@Override
+	public Document delete(@PathParam("name") final String name)
 	{
-		return new Card();
+		logger.info("Deleting comment {}", name);
+		return collection.findOneAndDelete(eq("name", name));
 	}
 }

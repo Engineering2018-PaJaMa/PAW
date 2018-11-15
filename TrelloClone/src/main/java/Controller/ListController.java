@@ -2,10 +2,11 @@ package Controller;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.io.IOException;
 import java.util.Optional;
 
-import javax.annotation.security.PermitAll;
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,41 +16,54 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mongodb.client.MongoCollection;
 
 import Representation.DTO.List;
 
-@Path("/boards/{boardId}/lists/{id}")
+@Path("/lists")
 @Produces(MediaType.APPLICATION_JSON)
-public class ListController extends EndpointController
+@Consumes(MediaType.APPLICATION_JSON)
+public class ListController implements EndpointController
 {
+	private Validator validator;
+	private MongoCollection<Document> collection;
+	private Logger logger;
+
 	public ListController(final Validator validator)
 	{
-		super(validator);
+		this.validator = validator;
+		collection = databaseController.getCollection("lists");
+		logger = LoggerFactory.getLogger(List.class);
 	}
 
-	@PermitAll
 	@GET
-	public Optional<Document> getListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	@Path("/{name}")
+	@Override
+	public Optional<Document> get(@PathParam("name") final String name)
 	{
-		LOGGER.info("Returning info for boardId: {} for listId: {}", boardId, listId);
-		return Optional.ofNullable(databaseController.getCollection("lists").find(eq("listId", listId)).first());
+		logger.info("Returning info from database for list {}", name);
+		return Optional.ofNullable(collection.find(eq("name", name)).first());
 	}
 
 	@POST
-	public List createListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	@Override
+	public List create(final String json) throws IOException
 	{
-		//I think we should get them from FormParam and use something along curl -X POST -d 'title=listTittle&etc..'
-		//getboardFromDatabase
-		//Add list to that board
-		List list = new List();
-		LOGGER.info("Creating list for boardId: {}, listId: {}", boardId, listId);
+		List list = objectMapper.readValue(json, List.class);
+		logger.info("Creating list {}", list.getName());
+		collection.insertOne(converter.convert(list));
 		return list;
 	}
 
 	@DELETE
-	public Document removeListById(@PathParam("boardId") final int boardId, @PathParam("listId") final int listId)
+	@Path("/{name}")
+	@Override
+	public Document delete(@PathParam("name") final String name)
 	{
-		LOGGER.info("Deleting from database list for boardId: {}, with listId: {}", boardId, listId);
-		return databaseController.getCollection("lists").findOneAndDelete(eq("listId", listId));
+		logger.info("Deleting list {}", name);
+		return collection.findOneAndDelete(eq("name", name));
 	}
 }

@@ -1,41 +1,69 @@
 package Controller;
 
+import static com.mongodb.client.model.Filters.eq;
+
+import java.io.IOException;
+import java.util.Optional;
+
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mongodb.client.MongoCollection;
+
 import Representation.DTO.Card;
 
-@Path("/boards/{id}/lists/{id}/cards/{id}")
+@Path("/cards")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class CardController extends EndpointController
+public class CardController implements EndpointController
 {
+	private Validator validator;
+	private MongoCollection<Document> collection;
+	private Logger logger;
+
 	public CardController(final Validator validator)
 	{
-		super(validator);
+		this.validator = validator;
+		collection = databaseController.getCollection("cards");
+		logger = LoggerFactory.getLogger(CardController.class);
 	}
 
 	@GET
-	public Card getCards()
+	@Path("/{name}")
+	@Override
+	public Optional<Document> get(@PathParam("name") final String name)
 	{
-		return new Card();
+		logger.info("Returning info from database for card {}", name);
+		return Optional.ofNullable(collection.find(eq("name", name)).first());
 	}
 
 	@POST
-	public Card createCard()
+	@Override
+	public Card create(final String json) throws IOException
 	{
-		return new Card();
+		Card card = objectMapper.readValue(json, Card.class);
+		logger.info("Creating card {}", card.getName());
+		collection.insertOne(converter.convert(card));
+		return card;
 	}
 
 	@DELETE
-	public Card removeCardById()
+	@Path("/{name}")
+	@Override
+	public Document delete(@PathParam("name") final String name)
 	{
-		return new Card();
+		logger.info("Deleting card {}", name);
+		return collection.findOneAndDelete(eq("name", name));
 	}
 }
