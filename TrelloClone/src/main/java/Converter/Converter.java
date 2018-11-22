@@ -15,7 +15,7 @@ public class Converter
 {
 	public Document convert(User user)
 	{
-		return new Document("username", user.getUsername()).append("password", user.getPassword()).append("roles", user.getRoles());
+		return new Document("username", user.getUsername()).append("password", user.getPassword());
 	}
 
 	public Document convert(Board board)
@@ -23,7 +23,6 @@ public class Converter
 		return new Document("id", board.getId()).append("userId", board.getUserId())
 				.append("name", board.getName())
 				.append("description", board.getDescription())
-				.append("state", board.getState())
 				.append("visibility", board.getVisibility());
 	}
 
@@ -33,7 +32,6 @@ public class Converter
 				.append("name", list.getName())
 				.append("description", list.getDescription())
 				.append("position", list.getPosition())
-				.append("state", list.getState())
 				.append("visibility", list.getVisibility());
 	}
 
@@ -43,7 +41,6 @@ public class Converter
 				.append("name", card.getName())
 				.append("description", card.getDescription())
 				.append("position", card.getPosition())
-				.append("state", card.getState())
 				.append("visibility", card.getVisibility());
 	}
 

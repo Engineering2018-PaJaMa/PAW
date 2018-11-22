@@ -26,27 +26,4 @@ public class DatabaseController
 	{
 		return database.getCollection(collectionName);
 	}
-
-	private void setCollection(String collectionName)
-	{
-		database.createCollection(collectionName);
-	}
-
-	public void setDocument(MongoCollection<Document> collectionForDoc, Document docForSet)
-	{
-		collectionForDoc.insertOne(docForSet);
-	}
-
-	public void deleteDocument(MongoCollection<Document> collectionForDoc, Document docForDel)
-	{
-		collectionForDoc.deleteOne(docForDel);
-	}
-
-	private void listAllCollection()
-	{
-		for (String name : database.listCollectionNames())
-		{
-			System.out.println(name);
-		}
-	}
 }

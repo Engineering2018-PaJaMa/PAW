@@ -1,5 +1,6 @@
 package Representation.DTO;
 
+import Representation.Visibility;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,5 @@ public class Card
 	private String name;
 	private String description;
 	private int position;
-	private String state;
-	private String visibility;
+	private Visibility visibility;
 }

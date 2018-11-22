@@ -12,6 +12,7 @@ import Representation.DTO.Board;
 import Representation.DTO.Card;
 import Representation.DTO.Comment;
 import Representation.DTO.List;
+import Representation.Visibility;
 
 public class ConnectDatabase
 {
@@ -41,7 +42,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("boards");
 		MongoCollection<Document> collection = database.getCollection("boards");
-		Board testBoard = new Board(1, 1, "boardName", "boardDescription", "boardState", "boardVisibility");
+		Board testBoard = new Board(1, 1, "boardName", "boardDescription", Visibility.VISIBLE);
 		collection.insertOne(converter.convert(testBoard));
 	}
 
@@ -49,7 +50,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("lists");
 		MongoCollection<Document> collection = database.getCollection("lists");
-		List list = new List(1, 1, "listName", "listDesc", 1, "listState", "listVisibility");
+		List list = new List(1, 1, "listName", "listDesc", 1, Visibility.VISIBLE);
 		collection.insertOne(converter.convert(list));
 	}
 
@@ -57,7 +58,7 @@ public class ConnectDatabase
 	{
 		database.createCollection("cards");
 		MongoCollection<Document> collection = database.getCollection("cards");
-		Card card = new Card(1, 1, "cardName", "cardDescription", 1, "cardState", "cardVisibility");
+		Card card = new Card(1, 1, "cardName", "cardDescription", 1, Visibility.VISIBLE);
 		collection.insertOne(converter.convert(card));
 	}
 
