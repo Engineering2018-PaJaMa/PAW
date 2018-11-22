@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
@@ -11,6 +11,24 @@ import { CardComponent } from './card/card.component';
 import { HomeComponent } from './home/home.component';
 import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
+import { AlertComponent } from './alert/alert.component';
+import { JwtInterceptor, ErrorInterceptor } from './helpers';
+import { AuthGuard } from './auth.guard';
+
+const appRoutes: Routes = [
+  
+    {path:'', component: HomeComponent, canActivate: [AuthGuard]},
+    {path:'register', component: RegisterScreenComponent},
+    {path:'login', component: LogInScreenComponent},
+    {path:'board', component: BoardComponent},
+    {path:'list', component: ListComponent},
+    {path:'card', component: CardComponent},
+
+    { path: '**', redirectTo: '' }
+  
+]
+
+
 
 
 @NgModule({
@@ -21,22 +39,24 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
     CardComponent,
     HomeComponent,
     LogInScreenComponent,
-    RegisterScreenComponent
+    RegisterScreenComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      {path:'',component: LogInScreenComponent},
-      {path:'register',component: RegisterScreenComponent},
-      {path:'home',component: HomeComponent},
-      {path:'board',component: BoardComponent},
-      {path:'list',component: ListComponent},
-      {path:'card',component: CardComponent},
-    ])
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,9 +3,6 @@ body,html {
     margin: 0;
     height: 100%;
 }
-button{
-    background-color: blanchedalmond;
-}
 
 .exampleBoard{
     background-color: rgb(202, 110, 49);
