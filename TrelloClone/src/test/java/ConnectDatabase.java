@@ -26,6 +26,7 @@ public class ConnectDatabase
 		addTestList();
 		addTestCard();
 		addTestComment();
+		addTestHistory();
 	}
 
 	private static void addTestUser()
@@ -66,5 +67,13 @@ public class ConnectDatabase
 		MongoCollection<Document> collection = database.getCollection("comments");
 		Comment comment = new Comment(1, 1, "commentName", "commentDescription");
 		collection.insertOne(converter.convert(comment));
+	}
+
+	private static void addTestHistory()
+	{
+		database.createCollection("history");
+		MongoCollection<Document> collection = database.getCollection("history");
+		Document document = new Document("change", "changingNothingToSomethingDuuh");
+		collection.insertOne(document);
 	}
 }

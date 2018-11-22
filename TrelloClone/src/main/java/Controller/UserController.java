@@ -30,12 +30,14 @@ public class UserController implements EndpointController
 {
 	private Validator validator;
 	private MongoCollection<Document> collection;
+	private MongoCollection<Document> history;
 	private Logger logger;
 
 	public UserController(final Validator validator)
 	{
 		this.validator = validator;
 		collection = databaseController.getCollection("users");
+		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(UserController.class);
 	}
 
@@ -53,6 +55,7 @@ public class UserController implements EndpointController
 	{
 		User user = objectMapper.readValue(json, User.class);
 		logger.info("Creating data for user: {}", user.getUsername());
+		history.insertOne(new Document("change", "Created user with name" + user.getUsername()));
 		collection.insertOne(converter.convert(user));
 		return user;
 	}
@@ -62,6 +65,7 @@ public class UserController implements EndpointController
 	public Document delete(@PathParam("username") final String username)
 	{
 		logger.info("Deleting from database user: {}", username);
+		history.insertOne(new Document("change", "Deleted user with name" + username));
 		return collection.findOneAndDelete(eq("username", username));
 	}
 }

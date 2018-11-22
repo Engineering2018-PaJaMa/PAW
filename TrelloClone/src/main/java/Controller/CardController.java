@@ -30,12 +30,14 @@ public class CardController implements EndpointController
 {
 	private Validator validator;
 	private MongoCollection<Document> collection;
+	private MongoCollection<Document> history;
 	private Logger logger;
 
 	public CardController(final Validator validator)
 	{
 		this.validator = validator;
 		collection = databaseController.getCollection("cards");
+		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(CardController.class);
 	}
 
@@ -55,6 +57,7 @@ public class CardController implements EndpointController
 	{
 		Card card = objectMapper.readValue(json, Card.class);
 		logger.info("Creating card {}", card.getName());
+		history.insertOne(new Document("change", "Created card with name" + card.getName()));
 		collection.insertOne(converter.convert(card));
 		return card;
 	}
@@ -65,6 +68,7 @@ public class CardController implements EndpointController
 	public Document delete(@PathParam("name") final String name)
 	{
 		logger.info("Deleting card {}", name);
+		history.insertOne(new Document("change", "Deleted card with name" + name));
 		return collection.findOneAndDelete(eq("name", name));
 	}
 }

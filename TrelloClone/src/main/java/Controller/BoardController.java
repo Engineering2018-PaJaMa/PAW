@@ -30,12 +30,14 @@ public class BoardController implements EndpointController
 {
 	private Validator validator;
 	private MongoCollection<Document> collection;
+	private MongoCollection<Document> history;
 	private Logger logger;
 
 	public BoardController(final Validator validator)
 	{
 		this.validator = validator;
 		collection = databaseController.getCollection("boards");
+		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(BoardController.class);
 	}
 
@@ -55,6 +57,7 @@ public class BoardController implements EndpointController
 	{
 		Board board = objectMapper.readValue(json, Board.class);
 		logger.info("Creating board {}", board.getName());
+		history.insertOne(new Document("change", "Created board with name" + board.getName()));
 		collection.insertOne(converter.convert(board));
 		return board;
 	}
@@ -65,6 +68,7 @@ public class BoardController implements EndpointController
 	public Document delete(@PathParam("name") final String name)
 	{
 		logger.info("Deleting board {}", name);
+		history.insertOne(new Document("change", "Deleted board with name" + name));
 		return collection.findOneAndDelete(eq("name", name));
 	}
 }

@@ -30,12 +30,14 @@ public class CommentController implements EndpointController
 {
 	private Validator validator;
 	private MongoCollection<Document> collection;
+	private MongoCollection<Document> history;
 	private Logger logger;
 
 	public CommentController(final Validator validator)
 	{
 		this.validator = validator;
 		collection = databaseController.getCollection("comments");
+		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(CommentController.class);
 	}
 
@@ -55,6 +57,7 @@ public class CommentController implements EndpointController
 	{
 		Comment comment = objectMapper.readValue(json, Comment.class);
 		logger.info("Creating comment {}", comment.getName());
+		history.insertOne(new Document("change", "Created comment with name" + comment.getName()));
 		collection.insertOne(converter.convert(comment));
 		return comment;
 	}
@@ -65,6 +68,7 @@ public class CommentController implements EndpointController
 	public Document delete(@PathParam("name") final String name)
 	{
 		logger.info("Deleting comment {}", name);
+		history.insertOne(new Document("change", "Deleted comment with name" + name));
 		return collection.findOneAndDelete(eq("name", name));
 	}
 }
