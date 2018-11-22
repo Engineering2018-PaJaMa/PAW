@@ -30,12 +30,14 @@ public class ListController implements EndpointController
 {
 	private Validator validator;
 	private MongoCollection<Document> collection;
+	private MongoCollection<Document> history;
 	private Logger logger;
 
 	public ListController(final Validator validator)
 	{
 		this.validator = validator;
 		collection = databaseController.getCollection("lists");
+		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(List.class);
 	}
 
@@ -55,6 +57,7 @@ public class ListController implements EndpointController
 	{
 		List list = objectMapper.readValue(json, List.class);
 		logger.info("Creating list {}", list.getName());
+		history.insertOne(new Document("change", "Created list with name" + list.getName()));
 		collection.insertOne(converter.convert(list));
 		return list;
 	}
@@ -65,6 +68,7 @@ public class ListController implements EndpointController
 	public Document delete(@PathParam("name") final String name)
 	{
 		logger.info("Deleting list {}", name);
+		history.insertOne(new Document("change", "Deleted list with name" + name));
 		return collection.findOneAndDelete(eq("name", name));
 	}
 }
