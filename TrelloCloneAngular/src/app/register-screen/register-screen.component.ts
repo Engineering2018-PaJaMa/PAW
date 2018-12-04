@@ -15,8 +15,8 @@ export class RegisterScreenComponent implements OnInit {
   }
 
   register(id,username,password) {
-    var user = new User(id,username,password)
-    this.service.register(user);
+   // var user = new User(id,username,password)
+    //this.service.register(user);
   }
 
 }

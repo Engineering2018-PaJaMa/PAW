@@ -12,24 +12,23 @@ import { HomeComponent } from './home/home.component';
 import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
 import { AlertComponent } from './alert/alert.component';
-import { JwtInterceptor, ErrorInterceptor } from './helpers';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import {JwtInterceptor} from './helpers/jwt.interceptor'
 import { AuthGuard } from './auth.guard';
+import {fakeBackendProvider} from './helpers/fake-backend'
 
 const appRoutes: Routes = [
   
-    {path:'', component: HomeComponent, canActivate: [AuthGuard]},
+    {path:'board', component: BoardComponent, canActivate: [AuthGuard]},
     {path:'register', component: RegisterScreenComponent},
     {path:'login', component: LogInScreenComponent},
     {path:'board', component: BoardComponent},
     {path:'list', component: ListComponent},
     {path:'card', component: CardComponent},
 
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'login' }
   
 ]
-
-
-
 
 @NgModule({
   declarations: [
