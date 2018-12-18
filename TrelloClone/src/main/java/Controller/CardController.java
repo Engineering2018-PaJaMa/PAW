@@ -58,10 +58,16 @@ public class CardController implements EndpointController
 	}
 
 	@GET
-	@Path("/{listId}")
+	@Path("/listParent/{listId}")
 	@Override
 	public List<Document> getByParentId(@PathParam("listId") String parentID) {
-		return null;
+		List<Document> cards = new ArrayList<>();
+
+		for (Document d : collection.find(eq("listId", parentID)))
+		{
+			cards.add(d);
+		}
+		return cards;
 	}
 
 

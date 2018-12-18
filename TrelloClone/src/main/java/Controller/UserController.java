@@ -58,7 +58,7 @@ public class UserController implements EndpointController
 	}
 
 	@GET
-	@Path("/{userrrrr}")
+	@Path("/userParent/{userrrrr}")
 	@Override
 	public List<Document> getByParentId(@PathParam("userrrrr") String parentID) {
 		return null;

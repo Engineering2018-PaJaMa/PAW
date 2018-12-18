@@ -58,7 +58,7 @@ public class BoardController implements EndpointController
 	}
 
 	@GET
-	@Path("/{all}")
+	@Path("/parent/{all}")
 	@Override
 	public List<Document> getByParentId(@PathParam("all") String parentID) {
 		return null;
