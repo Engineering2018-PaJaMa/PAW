@@ -64,7 +64,7 @@ public class ListController implements EndpointController
 
 		java.util.List<Document> lists = new ArrayList<>();
 
-		for (Document d : collection.find(eq("boardId", parentID)))
+		for (Document d : collection.find(eq("boardId", Integer.parseInt(parentID))))
 		{
 			lists.add(d);
 		}

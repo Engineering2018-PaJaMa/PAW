@@ -62,7 +62,7 @@ public class CommentController implements EndpointController
 	public List<Document> getByParentId(@PathParam("cardId") String parentID) {
 		List<Document> comments = new ArrayList<>();
 
-		for (Document d : collection.find(eq("cardId", parentID)))
+		for (Document d : collection.find(eq("cardId", Integer.parseInt(parentID))))
 		{
 			comments.add(d);
 		}

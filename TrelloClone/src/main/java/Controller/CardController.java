@@ -63,7 +63,7 @@ public class CardController implements EndpointController
 	public List<Document> getByParentId(@PathParam("listId") String parentID) {
 		List<Document> cards = new ArrayList<>();
 
-		for (Document d : collection.find(eq("listId", parentID)))
+		for (Document d : collection.find(eq("listId", Integer.parseInt(parentID))))
 		{
 			cards.add(d);
 		}
