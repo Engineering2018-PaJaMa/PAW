@@ -3,6 +3,8 @@ package Controller;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Validator;
@@ -41,10 +43,18 @@ public class UserController implements EndpointController
 		logger = LoggerFactory.getLogger(UserController.class);
 	}
 
+	@GET
 	@Override
-	public Document getAll()
+	public List<Document> getAll()
 	{
-		return null;
+		logger.info("Returning all users");
+		List<Document> users = new ArrayList<>();
+
+		for (Document d : collection.find())
+		{
+			users.add(d);
+		}
+		return users;
 	}
 
 	@GET

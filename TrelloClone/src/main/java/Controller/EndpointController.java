@@ -1,10 +1,8 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 
 import org.bson.Document;
 
@@ -22,9 +20,7 @@ public interface EndpointController
 	ObjectMapper objectMapper = new ObjectMapper();
 	Converter converter = new Converter();
 
-	@GET
-	@Path("/")
-	Document getAll();
+	List<Document> getAll();
 
 	Optional<Document> get(String name);
 
