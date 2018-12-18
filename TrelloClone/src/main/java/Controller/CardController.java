@@ -41,6 +41,12 @@ public class CardController implements EndpointController
 		logger = LoggerFactory.getLogger(CardController.class);
 	}
 
+	@Override
+	public Document getAll()
+	{
+		return null;
+	}
+
 	@GET
 	@Path("/{name}")
 	@Override

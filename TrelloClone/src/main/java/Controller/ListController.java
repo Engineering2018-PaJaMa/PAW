@@ -41,6 +41,12 @@ public class ListController implements EndpointController
 		logger = LoggerFactory.getLogger(List.class);
 	}
 
+	@Override
+	public Document getAll()
+	{
+		return null;
+	}
+
 	@GET
 	@Path("/{name}")
 	@Override

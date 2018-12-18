@@ -42,6 +42,15 @@ public class BoardController implements EndpointController
 	}
 
 	@GET
+	@Path("/")
+	@Override
+	public Document getAll()
+	{
+		logger.info("Returning info from database for board {}");
+		return null;
+	}
+
+	@GET
 	@Path("/{name}")
 	@Override
 	public Optional<Document> get(@PathParam("name") final String name)

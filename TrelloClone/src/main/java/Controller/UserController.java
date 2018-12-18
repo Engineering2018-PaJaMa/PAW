@@ -41,6 +41,12 @@ public class UserController implements EndpointController
 		logger = LoggerFactory.getLogger(UserController.class);
 	}
 
+	@Override
+	public Document getAll()
+	{
+		return null;
+	}
+
 	@GET
 	@Path("/{username}")
 	public Optional<Document> get(@PathParam("username") final String username)

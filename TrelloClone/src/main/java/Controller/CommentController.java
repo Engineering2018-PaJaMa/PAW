@@ -41,6 +41,12 @@ public class CommentController implements EndpointController
 		logger = LoggerFactory.getLogger(CommentController.class);
 	}
 
+	@Override
+	public Document getAll()
+	{
+		return null;
+	}
+
 	@GET
 	@Path("/{name}")
 	@Override
