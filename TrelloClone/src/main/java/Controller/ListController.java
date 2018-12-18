@@ -17,7 +17,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.mongodb.Block;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,11 +58,12 @@ public class ListController implements EndpointController
 		}
 		return lists;
 	}
+
 	@GET
 	@Path("/boardParent/{boardId}")
-	@Override
-	public java.util.List<Document> getByParentId(@PathParam("boardId") final Integer parentID) {
-		logger.info("Returning list of the board {}",parentID);
+	public java.util.List<Document> getByParentId(@PathParam("boardId") final Integer parentID)
+	{
+		logger.info("Returning list of the board {}", parentID);
 
 		java.util.List<Document> lists = new ArrayList<>();
 
