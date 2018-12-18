@@ -59,12 +59,12 @@ public class ListController implements EndpointController
 	@GET
 	@Path("/boardParent/{boardId}")
 	@Override
-	public java.util.List<Document> getByParentId(@PathParam("boardId") final String parentID) {
+	public java.util.List<Document> getByParentId(@PathParam("boardId") final Integer parentID) {
 		logger.info("Returning list of the board {}",parentID);
 
 		java.util.List<Document> lists = new ArrayList<>();
 
-		for (Document d : collection.find(eq("boardId", Integer.parseInt(parentID))))
+		for (Document d : collection.find(eq("boardId", parentID)))
 		{
 			lists.add(d);
 		}

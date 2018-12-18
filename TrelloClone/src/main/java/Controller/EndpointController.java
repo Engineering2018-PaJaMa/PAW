@@ -21,7 +21,7 @@ public interface EndpointController {
 
     List<Document> getAll();
 
-    List<Document> getByParentId(String parentID);
+    List<Document> getByParentId(Integer parentID);
 
     Optional<Document> get(String name);
 
