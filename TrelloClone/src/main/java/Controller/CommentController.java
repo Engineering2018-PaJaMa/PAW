@@ -56,6 +56,19 @@ public class CommentController implements EndpointController
 		}
 		return comments;
 	}
+	@GET
+	@Path("/cardParent/{cardId}")
+	@Override
+	public List<Document> getByParentId(@PathParam("cardId") Integer parentID) {
+		List<Document> comments = new ArrayList<>();
+
+		for (Document d : collection.find(eq("cardId", parentID)))
+		{
+			comments.add(d);
+		}
+		return comments;
+	}
+
 
 	@GET
 	@Path("/{name}")
