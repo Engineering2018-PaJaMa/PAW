@@ -58,6 +58,14 @@ public class CardController implements EndpointController
 	}
 
 	@GET
+	@Path("/{listId}")
+	@Override
+	public List<Document> getByParentId(@PathParam("listId") String parentID) {
+		return null;
+	}
+
+
+	@GET
 	@Path("/{name}")
 	@Override
 	public Optional<Document> get(@PathParam("name") final String name)

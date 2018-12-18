@@ -56,6 +56,13 @@ public class CommentController implements EndpointController
 		}
 		return comments;
 	}
+	@GET
+	@Path("/{cardId}")
+	@Override
+	public List<Document> getByParentId(@PathParam("cardId") String parentID) {
+		return null;
+	}
+
 
 	@GET
 	@Path("/{name}")

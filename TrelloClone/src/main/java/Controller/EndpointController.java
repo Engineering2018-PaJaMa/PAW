@@ -14,17 +14,18 @@ import MongoDB.DatabaseController;
 /**
  * Created by Paweł Szopa on 15/11/2018
  */
-public interface EndpointController
-{
-	DatabaseController databaseController = new DatabaseController().setUpConnection();
-	ObjectMapper objectMapper = new ObjectMapper();
-	Converter converter = new Converter();
+public interface EndpointController {
+    DatabaseController databaseController = new DatabaseController().setUpConnection();
+    ObjectMapper objectMapper = new ObjectMapper();
+    Converter converter = new Converter();
 
-	List<Document> getAll();
+    List<Document> getAll();
 
-	Optional<Document> get(String name);
+    List<Document> getByParentId(String parentID);
 
-	Object create(String json) throws IOException;
+    Optional<Document> get(String name);
 
-	Document delete(String name);
+    Object create(String json) throws IOException;
+
+    Document delete(String name);
 }
