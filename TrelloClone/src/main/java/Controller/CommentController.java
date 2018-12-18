@@ -67,6 +67,17 @@ public class CommentController implements EndpointController
 	}
 
 	@POST
+	@Path("/rename/{name}")
+	public Comment rename(@PathParam("name") final String name, final String json) throws IOException
+	{
+		Comment comment = objectMapper.readValue(json, Comment.class);
+		logger.info("Renaming comment {}", name);
+		history.insertOne(new Document("change", "Renaming comment with name " + name + " to " + comment.getName()));
+		collection.findOneAndUpdate(new Document("name", name), new Document("$set", new Document("name", comment.getName())));
+		return comment;
+	}
+
+	@POST
 	@Path("/create")
 	@Override
 	public Comment create(final String json) throws IOException
@@ -78,13 +89,24 @@ public class CommentController implements EndpointController
 		return comment;
 	}
 
+	@POST
+	@Path("/modify")
+	public Comment modify(final String json) throws IOException
+	{
+		Comment comment = objectMapper.readValue(json, Comment.class);
+		logger.info("Modifying comment {}", comment.getName());
+		history.insertOne(new Document("change", "Modifying comment with name " + comment.getName()));
+		collection.findOneAndUpdate(new Document("name", comment.getName()), new Document("$set", new Document("description", comment.getDescription())));
+		return comment;
+	}
+
 	@DELETE
 	@Path("/{name}")
 	@Override
 	public Document delete(@PathParam("name") final String name)
 	{
 		logger.info("Deleting comment {}", name);
-		history.insertOne(new Document("change", "Deleted comment with name" + name));
+		history.insertOne(new Document("change", "Deleted comment with name " + name));
 		return collection.findOneAndDelete(eq("name", name));
 	}
 }
