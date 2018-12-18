@@ -12,8 +12,8 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
+  seleniumAddress: 'http://localhost:4200',
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,

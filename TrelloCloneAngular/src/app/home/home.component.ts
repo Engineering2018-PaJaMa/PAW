@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
+import {BoardService} from '../services/boardService.service';
 
 @Component({
   selector: 'app-home',
@@ -7,25 +8,19 @@ import { Board } from '../board';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  board : Board = {
-    name:"",
-    desc:""
-  };
-  boards : Board[];
-
-  constructor() { }
+ 
+  boards: Board[];
+  newBoard: Board;
+  testBoards = [];
+constructor(private _BoardService:BoardService) {
+  }
 
   ngOnInit() {
-    //this.board = new Board(this.name,this.desc);
+    this._BoardService.getBoards()
+    .subscribe(_boardsList => this.boards = _boardsList);    
   }
 
-  deleteBoard(){
-  }
-
-  addBoard(nameBoard,descBoard){
-    this.board.name = nameBoard;
-    this.board.desc = descBoard;
-    this.boards.fill(this.board);
-  }
+ addBoard(){
+  this._BoardService.postBoard(this.newBoard);
+ }
 }

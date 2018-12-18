@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Board } from '../board';
+import {BoardService} from '../services/boardService.service';
+
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -7,21 +9,13 @@ import { Board } from '../board';
 })
 export class BoardComponent implements OnInit {
 
-    board: Board;
-    name:String;
-    desc:String;
-    
-  constructor() {
+    boards: Board[];
+    newBoard: Board;
+
+  constructor(private _BoardService:BoardService) {
     }
 
     ngOnInit() {
     }
-
-   addBoard(new_name:string,new_desc:string){
-    this.board.name = new_name;
-    this.board.desc = new_desc;
-    return this.board.name + ""+ this.board.desc;  
-  }
-
 
 }

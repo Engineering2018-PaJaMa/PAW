@@ -1,9 +1,10 @@
 export class Board {
-    name: string;
-    desc: string;
 
-    constructor(name,desc){
-      this.name = name;
-      this.desc = desc;
-    }
-  }
+    public id: number;
+    public userId: number;
+    public name: string;
+    public desc: string;
+    public state: string;
+    public visivility: string;
+
+}
