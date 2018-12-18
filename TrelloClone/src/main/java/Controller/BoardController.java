@@ -3,6 +3,8 @@ package Controller;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Validator;
@@ -39,6 +41,20 @@ public class BoardController implements EndpointController
 		collection = databaseController.getCollection("boards");
 		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(BoardController.class);
+	}
+
+	@GET
+	@Override
+	public List<Document> getAll()
+	{
+		logger.info("Returning all boards");
+		List<Document> boards = new ArrayList<>();
+
+		for (Document d : collection.find())
+		{
+			boards.add(d);
+		}
+		return boards;
 	}
 
 	@GET

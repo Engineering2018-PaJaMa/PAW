@@ -3,6 +3,8 @@ package Controller;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Validator;
@@ -39,6 +41,20 @@ public class CommentController implements EndpointController
 		collection = databaseController.getCollection("comments");
 		history = databaseController.getCollection("history");
 		logger = LoggerFactory.getLogger(CommentController.class);
+	}
+
+	@GET
+	@Override
+	public List<Document> getAll()
+	{
+		logger.info("Returning all comments");
+		List<Document> comments = new ArrayList<>();
+
+		for (Document d : collection.find())
+		{
+			comments.add(d);
+		}
+		return comments;
 	}
 
 	@GET

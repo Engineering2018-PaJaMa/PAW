@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.bson.Document;
@@ -18,6 +19,8 @@ public interface EndpointController
 	DatabaseController databaseController = new DatabaseController().setUpConnection();
 	ObjectMapper objectMapper = new ObjectMapper();
 	Converter converter = new Converter();
+
+	List<Document> getAll();
 
 	Optional<Document> get(String name);
 
