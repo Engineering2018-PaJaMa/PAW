@@ -13,13 +13,24 @@ export class CardComponent implements OnInit {
   @Input() desc: string;
   @Input() pos: number;
   cards: Card[];
-  
+  newCard = new Card;
   constructor(private _CardService:CardService) {
    }
 
   ngOnInit() {
     this._CardService.getCards()
     .subscribe(_boardsList => this.cards = _boardsList); 
+  }
+
+  addCard(name,desc)
+  {
+    this.newCard.name = name;
+    this.newCard.description = desc;
+    this.newCard.id = this.cards.length +1;
+    this.newCard.listId = this.pos;
+    this.newCard.visibility = "VISIBLE";
+    this.newCard.position = this.cards.length +1;
+    this._CardService.postCard(this.newCard);
   }
 
 }

@@ -10,7 +10,7 @@
 
   <div class="col">
     <div class="card">
-      <li *ngFor="let board of boards">
+      <ul *ngFor="let board of boards">
         <div class="card-body">
           <div class="col-sm-6">
           <h6 class="card-text">{{board.name}}</h6>
@@ -22,13 +22,13 @@
             <a [routerLink]="['/board',board.id]" class="btn btn-primary">Enter Board</a>
           </div>
           <div class="col-sm-6">
-            <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Board</button>
+            <button (click)="deleteBoard(board.name)" class="btn btn-primary bg-danger" >Delete Board</button>
           </div>
         </div>
-      </li>
+      </ul>
     </div>
   </div>
   <input #newName placeholder="Name of the Board" >
   <input #newDesc placeholder="Description" >
-  <button (click)="addBoard()" class="btn btn-primary bg-info" >Create Board</button>
+  <button (click)="addBoard(newName.value,newDesc.value)" class="btn btn-primary bg-info" >Create Board</button>
 </div>

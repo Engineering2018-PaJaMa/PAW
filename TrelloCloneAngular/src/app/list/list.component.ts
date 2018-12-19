@@ -13,11 +13,22 @@ export class ListComponent implements OnInit {
 
   @Input() name: string;
   @Input() desc: string;
-
-  constructor() { }
+  newList = new List;
+  lists: List[];
+  constructor(private _ListService:ListService) { }
 
   ngOnInit() {
-    
+    this._ListService.getList()
+    .subscribe(_boardsList => this.lists = _boardsList); 
   }
 
+  addList(name,desc)
+  {
+    this.newList.name = name;
+    this.newList.description = desc;
+    this.newList.id = this.lists.length +1;
+    this.newList.visibility = "VISIBLE";
+    this.newList.position = this.lists.length +1;
+    this._ListService.postList(this.newList);
+  }
 }
