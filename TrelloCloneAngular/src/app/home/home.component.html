@@ -19,7 +19,7 @@
           <h6 class="card-text">{{board.description}}</h6>
           </div>
           <div class="col-sm-6">
-            <a routerLink="/board" class="btn btn-primary">Enter Board</a>
+            <a [routerLink]="['/board',board.id]" class="btn btn-primary">Enter Board</a>
           </div>
           <div class="col-sm-6">
             <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Board</button>
