@@ -10,19 +10,25 @@
 
   <div class="col">
     <div class="card">
-      <div class="card-body">
-        <h6 class="card-title">{{board.name}}</h6>
-        <p class="card-text">{{board.desc}}</p>
-        <div class="col-sm-6">
-          <a routerLink="/board" class="btn btn-primary">Enter Board</a>
+      <li *ngFor="let board of boards">
+        <div class="card-body">
+          <div class="col-sm-6">
+          <h6 class="card-text">{{board.name}}</h6>
+          </div>
+          <div class="col-sm-6">
+          <h6 class="card-text">{{board.description}}</h6>
+          </div>
+          <div class="col-sm-6">
+            <a routerLink="/board" class="btn btn-primary">Enter Board</a>
+          </div>
+          <div class="col-sm-6">
+            <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Board</button>
+          </div>
         </div>
-        <div class="col-sm-6">
-          <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Board</button>
-        </div>
-      </div>
+      </li>
     </div>
   </div>
-  <input type="text" id="name" [(ngModel)]="board.name" placeholder="Name of the Board" />
-  <input type="text" id="desc" [(ngModel)]="board.desc" placeholder="Description" />
-  <button (click)="addBoard(name,desc)" class="btn btn-primary bg-info" >Create Board</button>
+  <input #newName placeholder="Name of the Board" >
+  <input #newDesc placeholder="Description" >
+  <button (click)="addBoard()" class="btn btn-primary bg-info" >Create Board</button>
 </div>

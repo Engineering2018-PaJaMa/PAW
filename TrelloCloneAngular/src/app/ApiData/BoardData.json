@@ -1,0 +1,6 @@
+[
+    { "_id":1,"_userId":1,"_name":"Pierwszy board","_desc":"Opis pierwszego","_state":"jakis state","_visivility":"widoczne"},
+    { "_id":2,"_userId":1,"_name":"Drugi board","_desc":"Opis drugiego","_state":"jakis state","_visivility":"widoczne" },
+    { "_id":3,"_userId":1,"_name":"Trzeci board","_desc":"Opis trzeciego","_state":"jakis state","_visivility":"widoczne" }
+
+]

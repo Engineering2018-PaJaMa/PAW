@@ -11,7 +11,7 @@ import { CardComponent } from './card/card.component';
 import { HomeComponent } from './home/home.component';
 import { LogInScreenComponent } from './log-in-screen/log-in-screen.component';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
-
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { RegisterScreenComponent } from './register-screen/register-screen.compo
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    HttpModule,
     RouterModule.forRoot([
       {path:'',component: LogInScreenComponent},
       {path:'register',component: RegisterScreenComponent},
