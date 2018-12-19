@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { CardService } from '../services/cardServices.service';
+import { Card } from '../card';
 
 @Component({
   selector: 'app-card',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+  @Input() name: string;
+  @Input() desc: string;
+  @Input() pos: number;
+  cards: Card[];
+  
+  constructor(private _CardService:CardService) {
+   }
 
   ngOnInit() {
+    this._CardService.getCards()
+    .subscribe(_boardsList => this.cards = _boardsList); 
   }
 
 }

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CardService } from '../services/cardServices.service';
+import { Card } from '../card';
+import { List } from '../list';
+import { ListService } from '../services/listService.service';
 
 @Component({
   selector: 'app-list',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
+  @Input() name: string;
+  @Input() desc: string;
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

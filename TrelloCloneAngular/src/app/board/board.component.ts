@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Board } from '../board';
-import {BoardService} from '../services/boardService.service';
+import { CardService } from '../services/cardServices.service';
+import { Card } from '../card';
+import { List } from '../list';
+import { ListService } from '../services/listService.service';
 
 @Component({
   selector: 'app-board',
@@ -9,13 +11,24 @@ import {BoardService} from '../services/boardService.service';
 })
 export class BoardComponent implements OnInit {
 
-    boards: Board[];
-    newBoard: Board;
+  lists: List[];
+  newList: List;
 
-  constructor(private _BoardService:BoardService) {
+  constructor(private _ListService:ListService) {
     }
 
     ngOnInit() {
+    this._ListService.getList()
+    .subscribe(_boardsList => this.lists = _boardsList);    
+    }
+
+    addCard(name:string,desc:string)
+    {
+      this.newList.name = name;
+      this.newList.desc = desc;
+      this.newList.boardId = this.lists.length + 1;
+      this.newList.visivility = "VISIBLE";
+      this._ListService.postList(this.newList);
     }
 
 }

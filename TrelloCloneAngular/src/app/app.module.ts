@@ -32,7 +32,7 @@ import { HttpModule } from '@angular/http';
       {path:'',component: LogInScreenComponent},
       {path:'register',component: RegisterScreenComponent},
       {path:'home',component: HomeComponent},
-      {path:'board',component: BoardComponent},
+      {path:'board/:id',component: BoardComponent,pathMatch:'full'},
       {path:'list',component: ListComponent},
       {path:'card',component: CardComponent},
     ])
