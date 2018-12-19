@@ -17,12 +17,13 @@
         </ul>
         <div class="row">
         <div class="col">
-            <input type="text" id="name" class="form-control input-sm chat-input" placeholder="Card Name" />
-            <input type="text" id="desc" class="form-control input-sm chat-input" placeholder="Description" />
-            <button (click)="addCard(name,desc)" class="btn btn-primary">Add Card</button>
+            <input #newName class="form-control input-sm chat-input" placeholder="Card Name" />
+            <input #newDesc class="form-control input-sm chat-input" placeholder="Description" />
+            <button (click)="addCard(newName.value,newDesc.value)" class="btn btn-primary">Add Card</button>
         </div>
         <div class="col">
-            <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Card</button>
+            <input #deleteName class="form-control input-sm chat-input" placeholder="Card Name to delete" />
+            <button (click)="deleteCard(deleteName.value)" class="btn btn-primary bg-danger" >Delete Card</button>
         </div>
     </div>
 </div>

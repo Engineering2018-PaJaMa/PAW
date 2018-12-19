@@ -25,10 +25,10 @@ export class CardComponent implements OnInit {
   addCard(name,desc)
   {
     this.newCard.name = name;
-    this.newCard.desc = desc;
+    this.newCard.description = desc;
     this.newCard.id = this.cards.length +1;
     this.newCard.listId = this.pos;
-    this.newCard.visivility = "VISIBLE";
+    this.newCard.visibility = "VISIBLE";
     this.newCard.position = this.cards.length +1;
     this._CardService.postCard(this.newCard);
   }

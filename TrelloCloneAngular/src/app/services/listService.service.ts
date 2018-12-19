@@ -26,4 +26,8 @@ postList(list:List)
     this.http.post(this._urlPost, JSON.stringify(list), options).subscribe(r=>{});
 }
 
+deleteList(name:string)
+{
+    this.http.delete(this._url +"/"+ name).subscribe(r=>{});
+}
 }

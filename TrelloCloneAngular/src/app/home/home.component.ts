@@ -21,10 +21,16 @@ constructor(private _BoardService:BoardService) {
 
  addBoard(name,description){
   this.newBoard.name = name;
-  this.newBoard.desc = description;
+  this.newBoard.description = description;
   this.newBoard.id = this.boards.length + 1;
   this.newBoard.userId = 1;
-  this.newBoard.visivility = "VISIBLE";
+  this.newBoard.visibility = "VISIBLE";
+  console.log(JSON.stringify(this.newBoard));
   this._BoardService.postBoard(this.newBoard);
+ }
+
+ deleteBoard(name)
+ {
+  this._BoardService.deleteBoard(name);
  }
 }

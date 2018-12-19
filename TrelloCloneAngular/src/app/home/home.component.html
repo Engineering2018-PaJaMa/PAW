@@ -22,7 +22,7 @@
             <a [routerLink]="['/board',board.id]" class="btn btn-primary">Enter Board</a>
           </div>
           <div class="col-sm-6">
-            <button (click)="deleteBoard()" class="btn btn-primary bg-danger" >Delete Board</button>
+            <button (click)="deleteBoard(board.name)" class="btn btn-primary bg-danger" >Delete Board</button>
           </div>
         </div>
       </ul>

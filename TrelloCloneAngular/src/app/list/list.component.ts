@@ -25,9 +25,9 @@ export class ListComponent implements OnInit {
   addList(name,desc)
   {
     this.newList.name = name;
-    this.newList.desc = desc;
+    this.newList.description = desc;
     this.newList.id = this.lists.length +1;
-    this.newList.visivility = "VISIBLE";
+    this.newList.visibility = "VISIBLE";
     this.newList.position = this.lists.length +1;
     this._ListService.postList(this.newList);
   }
