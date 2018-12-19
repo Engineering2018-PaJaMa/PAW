@@ -12,7 +12,7 @@ import { ListService } from '../services/listService.service';
 export class BoardComponent implements OnInit {
 
   lists: List[];
-  newList: List;
+  newList = new List;
 
   constructor(private _ListService:ListService) {
     }

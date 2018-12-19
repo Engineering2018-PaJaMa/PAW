@@ -4,7 +4,7 @@ export class Card {
     public listId: number;
     public name: string;
     public desc: string;
-    public position: string;
+    public position: number;
     public visivility: string;
 
 }

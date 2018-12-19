@@ -9,6 +9,8 @@ export class BoardService {
 
 private _url:string="http://localhost:8080/boards";
 private _urlPost:string="http://localhost:8080/boards/create";
+headers = new Headers({ 'Content-Type': 'application/json' });
+
 constructor(private http: Http) { }
 
 
@@ -20,9 +22,8 @@ getBoards()
 
 postBoard(board:Board)
 {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    this.http.post(this._urlPost, JSON.stringify(board), options).subscribe(r=>{});
+    
+    this.http.post(this._urlPost, JSON.stringify(board), {headers: this.headers}).subscribe(r=>{console.log(r)});
 }
 
 }

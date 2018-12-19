@@ -10,8 +10,7 @@ import {BoardService} from '../services/boardService.service';
 export class HomeComponent implements OnInit {
  
   boards: Board[];
-  newBoard: Board;
-  testBoards = [];
+  newBoard = new Board;
 constructor(private _BoardService:BoardService) {
   }
 
@@ -20,7 +19,12 @@ constructor(private _BoardService:BoardService) {
     .subscribe(_boardsList => this.boards = _boardsList);    
   }
 
- addBoard(){
+ addBoard(name,description){
+  this.newBoard.name = name;
+  this.newBoard.desc = description;
+  this.newBoard.id = this.boards.length + 1;
+  this.newBoard.userId = 1;
+  this.newBoard.visivility = "VISIBLE";
   this._BoardService.postBoard(this.newBoard);
  }
 }
