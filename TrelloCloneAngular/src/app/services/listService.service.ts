@@ -23,11 +23,12 @@ postList(list:List)
 {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    this.http.post(this._urlPost, JSON.stringify(list), options).subscribe(r=>{});
+    this.http.post(this._urlPost, JSON.stringify(list), options).subscribe(r=>{console.log(r)});
 }
 
 deleteList(name:string)
 {
-    this.http.delete(this._url +"/"+ name).subscribe(r=>{});
+    this.http.delete(this._url +"/"+ name).subscribe(r=>{console.log(r)});
 }
+
 }
