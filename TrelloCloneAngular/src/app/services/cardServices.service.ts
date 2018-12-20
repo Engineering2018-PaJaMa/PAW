@@ -3,6 +3,7 @@ import {Http,Response, RequestOptions, Headers} from '@angular/http';
 import {map, catchError} from 'rxjs/operators';
 import { Card } from '../card';
 import { Comments } from '../comment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 
@@ -25,9 +26,15 @@ getCards()
     .pipe(map((response:Response)=>response.json()));
 }
 
-postCard(card:Card)
+getCardsById(id: string)
 {
-    this.http.post(this._urlPost, JSON.stringify(card), this.options).subscribe(r=>{console.log(r)});
+    return this.http.get(this._url + "/listParent/" + id)
+    .pipe(map((response:Response)=>response.json()));
+}
+
+postCard(card:Card): Observable<any>
+{
+    return  this.http.post(this._urlPost, JSON.stringify(card), this.options);
 }
 
 renameCard(card:Card)

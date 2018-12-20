@@ -4,7 +4,7 @@
         <div class="list"   *ngFor="let list of lists">
     
             <h3 class="list-title">{{list.name}}</h3>
-            <app-list></app-list>   
+            <app-list [listId]=list.id ></app-list>   
         </div>
 
     </section>
