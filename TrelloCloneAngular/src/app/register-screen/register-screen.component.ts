@@ -9,14 +9,16 @@ import { User } from '../user';
 })
 export class RegisterScreenComponent implements OnInit {
 
+  user: User;
+
   constructor(private service: AppUserService) { }
 
   ngOnInit() {
   }
 
-  register(id,username,password) {
-    var user = new User(id,username,password)
-    this.service.register(user);
+  register(username: string,password: string) {
+    this.user = new User(1,username,password)
+    this.service.register(username, password);
   }
 
 }

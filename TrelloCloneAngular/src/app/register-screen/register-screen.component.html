@@ -11,13 +11,13 @@
         <div class="col-md-offset-5 col-md-3">
             <div class="form-login">
             <h4>Register new user</h4>
-            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="New username" />
+            <input #userName  type="text" class="form-control input-sm chat-input" placeholder="New username" />
             <br>
-            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="New password" />
+            <input #userPassword type="password"  class="form-control input-sm chat-input" placeholder="New password" />
             <br>
             <div class="wrapper">
             <span class="btn-group-vertical">
-                <button class="btn btn-primary btn-md"  (click)="register(userName,userPassword)">Register <i class="fa fa-sign-in"></i></button>
+                <button class="btn btn-primary btn-md"  (click)="register(userName.value,userPassword.value)">Register <i class="fa fa-sign-in"></i></button>
                 <a class="btn btn-primary btn-md" routerLink="">Home <i class="fa fa-sign-in"></i></a>
             </span>
             </div>
