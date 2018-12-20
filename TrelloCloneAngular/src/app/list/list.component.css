@@ -86,7 +86,7 @@ body {
 }
 
 .add-card-btn {
-  display: block;
+  display: inline-block;
   font-size: 1.4rem;
   font-weight: 400;
   color: #838c91;

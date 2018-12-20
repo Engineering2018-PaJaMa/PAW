@@ -6,19 +6,10 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<ul class="list-items" *ngFor="let card of cards">
+<ul class="list-items"  *ngFor="let card of cards">
                 <li>{{card.name}}</li> 
-                <app-card></app-card>
              
 </ul>
 <input #ListName class="form-control input-sm chat-input" placeholder="New card name..." />
-<button class="add-card-btn btn" (click)="addList(ListName.value)" >Add a card</button>
-
-    
-
-<!-- <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">{{name}}</div>
-        <div>{{desc}}</div>
-        <div class="card-body">   
-        <app-card></app-card>
-</div> -->
+<button class="add-card-btn btn" (click)="addCard(ListName.value)" >Add a card</button>
+<button class="add-card-btn btn" (click)="archiveCard(ListName.value)" >Del a card</button>
