@@ -8,6 +8,13 @@ import Controller.UserController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+import javax.servlet.Registration;
+import java.util.EnumSet;
+
 
 public class TrelloCloneCoreApplication extends Application<TrelloCloneCoreConfiguration>
 {
@@ -36,5 +43,19 @@ public class TrelloCloneCoreApplication extends Application<TrelloCloneCoreConfi
 		environment.jersey().register(new ListController(environment.getValidator()));
 		environment.jersey().register(new CardController(environment.getValidator()));
 		environment.jersey().register(new CommentController(environment.getValidator()));
+		configureCors(environment);
+	}
+
+
+
+// among other imports for Dropwizard, you'll need these specific ones:
+	private void configureCors(Environment environment) {
+		Registration.Dynamic filter = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+		((FilterRegistration.Dynamic) filter).addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+		filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
+		filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
+		filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
+		filter.setInitParameter("allowedHeaders", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin");
+		filter.setInitParameter("allowCredentials", "true");
 	}
 }
