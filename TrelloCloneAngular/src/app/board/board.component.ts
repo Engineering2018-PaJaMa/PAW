@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BoardComponent implements OnInit {
 
+
   lists: List[];
   newList = new List;
 

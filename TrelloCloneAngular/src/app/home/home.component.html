@@ -6,29 +6,20 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<div class="row">
 
-  <div class="col">
-    <div class="card">
-      <ul *ngFor="let board of boards">
-        <div class="card-body">
-          <div class="col-sm-6">
-          <h6 class="card-text">{{board.name}}</h6>
-          </div>
-          <div class="col-sm-6">
-          <h6 class="card-text">{{board.description}}</h6>
-          </div>
-          <div class="col-sm-6">
-            <a [routerLink]="['/board',board.id]" class="btn btn-primary">Enter Board</a>
-          </div>
-          <div class="col-sm-6">
-            <button (click)="deleteBoard(board.name)" class="btn btn-primary bg-danger" >Delete Board</button>
-          </div>
-        </div>
-      </ul>
-    </div>
-  </div>
-  <input #newName placeholder="Name of the Board" >
-  <input #newDesc placeholder="Description" >
-  <button (click)="addBoard(newName.value,newDesc.value)" class="btn btn-primary bg-info" >Create Board</button>
+
+<div class="boards-wrapper">
+<h3> Boards </h3>
+<div id="boards">
+  <a class = "board a" *ngFor="let board of boards" [routerLink]="['/board',board.id]">
+  <span class="title">{{board?.name}}</span>
+  </a>
+  
 </div>
+
+<div class="card-group">
+    <input #newName placeholder="Name of the Board" >
+    <input #newDesc placeholder="Description" >
+    <button (click)="addBoard(newName.value,newDesc.value)" class="btn btn-primary bg-info" >Create Board</button>
+  </div>
+

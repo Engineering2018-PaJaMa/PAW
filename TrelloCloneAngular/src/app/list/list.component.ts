@@ -22,10 +22,10 @@ export class ListComponent implements OnInit {
     .subscribe(_boardsList => this.lists = _boardsList); 
   }
 
-  addList(name,desc)
+  addList(name)
   {
     this.newList.name = name;
-    this.newList.description = desc;
+    this.newList.description = "desc";
     this.newList.id = this.lists.length +1;
     this.newList.visibility = "VISIBLE";
     this.newList.position = this.lists.length +1;

@@ -1,29 +1,24 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
+  <section class="lists-container" >
 
+        <div class="list"   *ngFor="let list of lists">
+    
+            <h3 class="list-title">{{list.name}}</h3>
+            <app-list></app-list>   
+        </div>
+
+    </section>
+
+  
 <div class="card-group">
-        <ul *ngFor="let list of lists">
-            <div class="card">         
-                <div class="card-body">
-                <app-list [name]=list.name [desc]=list.description></app-list>
-                </div>
-            </div>
-        </ul>
         <div class="row">
         <div class="col">
-            <input #newName class="form-control input-sm chat-input" placeholder="Card Name" />
-            <input #newDesc class="form-control input-sm chat-input" placeholder="Description" />
-            <button (click)="addCard(newName.value,newDesc.value)" class="btn btn-primary">Add Card</button>
+            <input #newName class="form-control input-sm chat-input" placeholder="List Name..." />
+            <button (click)="addCard(newName.value)" class="btn btn-primary">Add List</button>
         </div>
         <div class="col">
-            <input #deleteName class="form-control input-sm chat-input" placeholder="Card Name to delete" />
-            <button (click)="deleteCard(deleteName.value)" class="btn btn-primary bg-danger" >Delete Card</button>
+            <input #deleteName class="form-control input-sm chat-input" placeholder="List Name..." />
+            <button (click)="deleteCard(deleteName.value)" class="btn btn-primary bg-danger" >Delete List</button>
         </div>
     </div>
 </div>
